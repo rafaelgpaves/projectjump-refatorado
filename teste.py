@@ -1,2 +1,0 @@
-print("Eae")
-print("Salve")
