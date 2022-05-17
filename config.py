@@ -5,9 +5,9 @@ IMG_DIR = path.join(path.dirname(__file__), "assets", "images") # Pasta de image
 SND_DIR = path.join(path.dirname(__file__), "assets", "sounds") # Pasta de sons
 
 # Dados gerais do jogo
-WIDTH = 300    # Largura da tela
-HEIGHT = 700   # Altura da tela
-FPS = 60       # Frames por segundo
+WIDTH = 500    # Largura da tela
+HEIGHT = 600   # Altura da tela
+FPS = 45       # Frames por segundo
 
 # Define tamanhos
 PLAYER_WIDTH = 51
@@ -25,4 +25,7 @@ YELLOW = (255, 255, 0)
 # Estados do jogo
 INIT = 0
 LEVEL1 = 1
-QUIT = 2
+LEVEL2 = 2
+LEVEL3 = 3
+END_SCREEN = 4
+QUIT = 5
