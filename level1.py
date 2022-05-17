@@ -31,12 +31,18 @@ def level1(window):
             if event.type == pygame.KEYDOWN:
                 keys_down[event.key] = True
                 if event.key == pygame.K_SPACE:
+                    if player.is_on_wall == True:
+                        player.is_on_wall = False
+                        if player.rect.right >= WIDTH:
+                            player.speedx = -7
+                        elif player.rect.left <= 0:
+                            player.speedx = 7
                     if player.jumps < player.max_jumps:
                         player.GRAVITY = -20
                         player.jumps += 1
 
-        
-        player.GRAVITY += 1
+        if player.is_on_wall == False:
+            player.GRAVITY += 1
 
         all_sprites.update()
 
