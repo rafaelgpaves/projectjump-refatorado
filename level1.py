@@ -6,10 +6,9 @@ from funcs import *
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 square_effects = []
-player_pos = [window.get_width() // 2, window.get_height() // 2]
 
 def level1(window):
-    scrolling = 0
+    cube_scroll = 0
     clock = pygame.time.Clock()
 
     assets = load_assets()
@@ -78,16 +77,13 @@ def level1(window):
 
         if player.is_grounded == False and player.is_on_wall == False and player.is_on_platform_right == False and player.is_on_platform_right == False:
             player.GRAVITY += 1
-        
-        if scrolling < player_pos[1] - 200:
-            scrolling += (player_pos[1] - 200 - scrolling) / 10
 
         all_sprites.update()
 
         window.fill((background_color))
 
         if random.randint(1, 60) == 1:
-            square_effects.append([[random.randint(0, window.get_width()), - 90 + scrolling], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
+            square_effects.append([[random.randint(0, window.get_width()), - 90 + cube_scroll], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
 
         for i, effect in sorted(enumerate(square_effects), reverse = True):
             effect[0][1] += effect[2]
