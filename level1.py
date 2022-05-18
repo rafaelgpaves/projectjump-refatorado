@@ -66,10 +66,11 @@ def level1(window):
                 player.rect.bottom = hit.rect.top
                 player.is_grounded = True
                 player.jumps = 0
+                player.GRAVITY = 0
             elif player.rect.top <= hit.rect.bottom:
                 # print('to aqui 2')
                 player.rect.top = hit.rect.bottom
-                player.GRAVITY = 5
+                player.GRAVITY = 0
             # elif player.rect.top < hit.rect.bottom:
             #     player.rect.top = hit.rect.bottom  
             # if player.rect.right > hit.rect.left:
