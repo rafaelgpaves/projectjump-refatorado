@@ -87,12 +87,12 @@ def level1(window):
         window.fill((background_color))
 
         if random.randint(1, 60) == 1:
-            square_effects.append([[random.randint(0, window.get_width()), -80 + scrolling], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 40), random.randint(10, 30) / 500])
+            square_effects.append([[random.randint(0, window.get_width()), - 90 + scrolling], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
 
         for i, effect in sorted(enumerate(square_effects), reverse = True):
             effect[0][1] += effect[2]
             effect[1] += effect[2] * effect[4]
-            effect[3] -= effect[4]
+            effect[3] -= effect[4] / 2
             points = [
                 gira(effect[0], math.degrees(effect[1]), effect[3]),
                 gira(effect[0], math.degrees(effect[1]) + 90, effect[3]),
