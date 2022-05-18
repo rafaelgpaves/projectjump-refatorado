@@ -29,3 +29,7 @@ LEVEL2 = 2
 LEVEL3 = 3
 END_SCREEN = 4
 QUIT = 5
+
+# Background
+background_color = (0, 0, 0)
+background_polygon_color = (48, 48, 48)
