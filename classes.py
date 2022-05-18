@@ -20,6 +20,7 @@ class Player(pygame.sprite.Sprite):
 
         self.is_on_wall = False # Variável que é True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
         self.is_grounded = True
+        self.platform_collision = False
         self.is_on_platform_right = False
         self.is_on_platform_left = False
 
@@ -28,26 +29,34 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
 
+        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.platform_collision == False:
+            self.GRAVITY += 1
+
         self.rect.x += self.speedx
         self.rect.y += self.GRAVITY
 
-        if self.rect.bottom >= HEIGHT:
-            self.is_grounded = True
-        else:
-            self.is_grounded = False
-
-        if self.is_grounded == True:
-            self.jumps = 0
-            self.GRAVITY = 0
+        # if self.is_grounded == True:
+        #     self.jumps = 0
+        #     self.GRAVITY = 0
+        #     print("AAAAA")
 
         if (self.rect.right >= WIDTH or self.rect.left <= 0) and self.is_grounded == False:
             self.is_on_wall = True
         else:
             self.is_on_wall = False
 
-        if self.is_on_wall == True:
+        if self.is_on_wall == True or self.is_on_platform_left == True or self.is_on_platform_right == True:
             self.jumps = 0 # Resetando o numero de pulos
             self.GRAVITY = 5 # Menor gravidade para sensação de deslizamento
+
+        if self.rect.bottom >= HEIGHT or self.platform_collision == True:
+            self.is_grounded = True
+        else:
+            self.is_grounded = False
+
+        if self.is_grounded == True:
+            self.jumps = 0
+            # self.GRAVITY = 0
 
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -57,9 +66,10 @@ class Player(pygame.sprite.Sprite):
             self.rect.left = 0
             if self.is_on_wall == False:
                 self.speedx = 7
-        if self.rect.bottom > HEIGHT:
+        if self.rect.bottom >= HEIGHT:
             self.rect.bottom = HEIGHT
             self.is_on_wall = False
+            self.is_grounded = True
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
