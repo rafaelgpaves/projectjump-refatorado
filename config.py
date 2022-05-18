@@ -12,6 +12,8 @@ FPS = 45       # Frames por segundo
 # Define tamanhos
 PLAYER_WIDTH = 51
 PLAYER_HEIGHT = 51
+PLATFORM_WIDTH = 200
+PLATFORM_HEIGHT = 100
 
 # Define cores
 WHITE = (255, 255, 255)
@@ -21,6 +23,9 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
+
+# Quantidade de inimigos e outros
+PLATFORM_NUMBER = 1
 
 # Estados do jogo
 INIT = 0
