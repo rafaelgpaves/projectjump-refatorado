@@ -1,5 +1,6 @@
-import pygame
+import pygame, random, math, sys
 from config import *
+from funcs import *
 from level1 import level1
 
 pygame.init()
