@@ -36,8 +36,16 @@ class Player(pygame.sprite.Sprite):
         else:
             self.is_grounded = False
 
+        if self.is_grounded == True:
+            self.jumps = 0
+            self.GRAVITY = 0
+
         if (self.rect.right >= WIDTH or self.rect.left <= 0) and self.is_grounded == False:
             self.is_on_wall = True
+        else:
+            self.is_on_wall = False
+
+        if self.is_on_wall == True:
             self.jumps = 0 # Resetando o numero de pulos
             self.GRAVITY = 5 # Menor gravidade para sensação de deslizamento
 

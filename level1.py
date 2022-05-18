@@ -56,17 +56,39 @@ def level1(window):
 
         platform_collision = pygame.sprite.spritecollide(player, all_platforms, False, pygame.sprite.collide_mask)
         for hit in platform_collision:
+            # print('pb: ', player.rect.bottom, ' rt: ', hit.rect.top)
+            if player.rect.bottom >= hit.rect.top and player.rect.top < hit.rect.top:
+                # print('to aqui 1')
+                player.rect.bottom = hit.rect.top
+                player.is_grounded = True
+                player.jumps = 0
+            elif player.rect.top <= hit.rect.bottom:
+                # print('to aqui 2')
+                player.rect.top = hit.rect.bottom
+                player.GRAVITY = 5
+            # elif player.rect.top < hit.rect.bottom:
+            #     player.rect.top = hit.rect.bottom  
             # if player.rect.right > hit.rect.left:
             #     player.rect.right = hit.rect.left
             #     player.is_on_platform_left = True
             #     player.GRAVITY = 5
-            if player.rect.bottom > hit.rect.top:
-                player.rect.bottom = hit.rect.top
-                player.is_grounded = True
-                player.jumps = 0
-            elif player.rect.top < hit.rect.bottom:
-                player.rect.top = hit.rect.bottom  
             # elif player.rect.left < hit.rect.right:
+            #     player.rect.left = hit.rect.right
+            #     player.is_on_platform_right = True
+            #     player.GRAVITY = 5
+
+            # tentativa 2 
+            # if player.GRAVITY >= 0 and player.rect.bottom > hit.rect.top:
+            #     player.rect.bottom = hit.rect.top
+            #     player.is_grounded = True
+            #     player.jumps = 0
+            # elif player.GRAVITY < 0 and player.rect.top < hit.rect.bottom:
+            #     player.rect.top = hit.rect.bottom  
+            # if player.speedx > 0 and player.rect.right >= hit.rect.left:
+            #     player.rect.right = hit.rect.left
+            #     player.is_on_platform_left = True
+            #     player.GRAVITY = 5
+            # elif player.speedx < 0:
             #     player.rect.left = hit.rect.right
             #     player.is_on_platform_right = True
             #     player.GRAVITY = 5
