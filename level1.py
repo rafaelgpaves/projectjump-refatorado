@@ -47,7 +47,7 @@ def level1(window):
                     if player.is_on_platform_left == True:
                         player.is_on_platform_left = False
                         player.speedx = -7
-                    if player.is_on_platform_right == True:
+                    elif player.is_on_platform_right == True:
                         player.is_on_platform_right = False
                         player.speedx = 7
                     if player.jumps < player.max_jumps:
@@ -55,24 +55,23 @@ def level1(window):
                         player.jumps += 1
 
         platform_collision = pygame.sprite.spritecollide(player, all_platforms, False, pygame.sprite.collide_mask)
-        # for hit in platform_collision:
-        if platform_collision:
-            if player.rect.bottom > platform_collision[0].rect.top:
-                player.rect.bottom = platform_collision[0].rect.top
-                player.GRAVITY = 0
-                player.jumps = 0
-            # elif player.rect.top < hit.rect.bottom:
-            #     player.rect.top = hit.rect.bottom
-            # elif player.rect.right > hit.rect.left:
+        for hit in platform_collision:
+            # if player.rect.right > hit.rect.left:
             #     player.rect.right = hit.rect.left
             #     player.is_on_platform_left = True
             #     player.GRAVITY = 5
+            if player.rect.bottom > hit.rect.top:
+                player.rect.bottom = hit.rect.top
+                player.is_grounded = True
+                player.jumps = 0
+            elif player.rect.top < hit.rect.bottom:
+                player.rect.top = hit.rect.bottom  
             # elif player.rect.left < hit.rect.right:
             #     player.rect.left = hit.rect.right
             #     player.is_on_platform_right = True
             #     player.GRAVITY = 5
 
-        if player.is_on_wall == False and player.is_on_platform_right == False and player.is_on_platform_right == False:
+        if player.is_grounded == False and player.is_on_wall == False and player.is_on_platform_right == False and player.is_on_platform_right == False:
             player.GRAVITY += 1
 
         all_sprites.update()

@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
 
         self.is_on_wall = False # Variável que é True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
-        self.is_grounded = False
+        self.is_grounded = True
         self.is_on_platform_right = False
         self.is_on_platform_left = False
 
@@ -31,7 +31,12 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         self.rect.y += self.GRAVITY
 
-        if (self.rect.right >= WIDTH or self.rect.left <= 0) and self.rect.bottom < HEIGHT:
+        if self.rect.bottom >= HEIGHT:
+            self.is_grounded = True
+        else:
+            self.is_grounded = False
+
+        if (self.rect.right >= WIDTH or self.rect.left <= 0) and self.is_grounded == False:
             self.is_on_wall = True
             self.jumps = 0 # Resetando o numero de pulos
             self.GRAVITY = 5 # Menor gravidade para sensação de deslizamento
@@ -47,9 +52,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
             self.is_on_wall = False
-
-        if self.rect.bottom >= HEIGHT:
-            self.jumps = 0 # Resetando o numero de pulos que o jogador pode dar
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
