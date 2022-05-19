@@ -35,46 +35,46 @@ def level1(window):
 
         for event in pygame.event.get():
 
+            # Sair do jogo
             if event.type == pygame.QUIT:
                 state = QUIT
                 running = False
 
             if event.type == pygame.KEYDOWN:
                 keys_down[event.key] = True
+                # Pular
                 if event.key == pygame.K_SPACE and player.jumps < player.max_jumps:
-                    if player.is_on_wall == True:
+                    if player.is_on_wall == True: # Jogador está na parede
                         player.is_on_wall = False
                         if player.rect.right >= WIDTH:
                             player.speedx = -7
                         elif player.rect.left <= 0:
                             player.speedx = 7
-                    if player.is_on_platform_left == True:
+                    if player.is_on_platform_left == True: # Jogador está no lado esquerdo da plataforma
                         player.is_on_platform_left = False
                         player.speedx = -7
-                    elif player.is_on_platform_right == True:
+                    elif player.is_on_platform_right == True: # Jogador está no lado direito da plataforma
                         player.is_on_platform_right = False
                         player.speedx = 7
 
-                    player.GRAVITY = -20
+                    player.GRAVITY = -20 # Diminuir a gravidade é o que faz o jogador ir para cima
                     player.jumps += 1
 
         all_sprites.update()
 
+        # Resetando certas variáveis (serve para impedir que uma vez que elas fiquem True, não sejam True para sempre)
         player.on_platform = False
         player.is_on_platform_left = False
         player.is_on_platform_right = False
 
         platform_collision = pygame.sprite.spritecollide(player, all_platforms, False, pygame.sprite.collide_mask)
         for hit in platform_collision:
-            # print('pb: ', player.rect.bottom, ' rt: ', hit.rect.top)
             if player.rect.bottom >= hit.rect.top and player.rect.top < hit.rect.top:
-                # print('to aqui 1')
                 player.rect.bottom = hit.rect.top
                 player.on_platform = True
                 player.jumps = 0
                 player.GRAVITY = 0
             elif player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.bottom:
-                # print('to aqui 2')
                 player.rect.top = hit.rect.bottom
                 player.GRAVITY = 0
             if player.rect.right >= hit.rect.left and player.rect.left < hit.rect.left and ((player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.top) or (player.rect.bottom > hit.rect.bottom and player.rect.top < hit.rect.bottom)):

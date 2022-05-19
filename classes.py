@@ -19,10 +19,10 @@ class Player(pygame.sprite.Sprite):
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
 
         self.is_on_wall = False # Variável que é True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
-        self.is_grounded = True
-        self.on_platform = False
-        self.is_on_platform_right = False
-        self.is_on_platform_left = False
+        self.is_grounded = True # Variável que é True se o jogador estiver no chão e False caso contrário
+        self.on_platform = False # Variável que é True se o jogador estiver em cima de uma plataforma e False caso contrário
+        self.is_on_platform_right = False # Variável que é True se o jogador estiver encostando no lado direito da plataforma e False caso contrário
+        self.is_on_platform_left = False # Variável que é True se o jogador estiver encostando no lado direito da plataforma e False caso contrário
 
         self.groups = groups
         self.assets = assets
