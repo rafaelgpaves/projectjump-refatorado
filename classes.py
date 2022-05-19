@@ -35,11 +35,6 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         self.rect.y += self.GRAVITY
 
-        # if self.is_grounded == True:
-        #     self.jumps = 0
-        #     self.GRAVITY = 0
-        #     print("AAAAA")
-
         if (self.rect.right >= WIDTH or self.rect.left <= 0) and self.is_grounded == False:
             self.is_on_wall = True
         else:
@@ -56,7 +51,6 @@ class Player(pygame.sprite.Sprite):
 
         if self.is_grounded == True:
             self.jumps = 0
-            # self.GRAVITY = 0
 
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH

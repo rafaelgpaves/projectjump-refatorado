@@ -58,6 +58,8 @@ def level1(window):
                     player.GRAVITY = -20
                     player.jumps += 1
 
+        all_sprites.update()
+
         player.platform_collision = False
         player.is_on_platform_left = False
         player.is_on_platform_right = False
@@ -66,11 +68,10 @@ def level1(window):
         for hit in platform_collision:
             # print('pb: ', player.rect.bottom, ' rt: ', hit.rect.top)
             if player.rect.bottom >= hit.rect.top and player.rect.top < hit.rect.top:
-                print('to aqui 1')
+                # print('to aqui 1')
                 player.rect.bottom = hit.rect.top
                 player.platform_collision = True
                 player.jumps = 0
-                # player.GRAVITY = 0
             elif player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.bottom:
                 # print('to aqui 2')
                 player.rect.top = hit.rect.bottom
@@ -78,16 +79,9 @@ def level1(window):
             if player.rect.right >= hit.rect.left and player.rect.left < hit.rect.left and ((player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.top) or (player.rect.bottom > hit.rect.bottom and player.rect.top < hit.rect.bottom)):
                 player.rect.right = hit.rect.left
                 player.is_on_platform_left = True
-                player.GRAVITY = 5
             elif player.rect.left <= hit.rect.right and player.rect.right > hit.rect.right and ((player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.top) or (player.rect.bottom > hit.rect.bottom and player.rect.top < hit.rect.bottom)):
                 player.rect.left = hit.rect.right
                 player.is_on_platform_right = True
-                player.GRAVITY = 5
-
-        # if player.is_on_wall == False and player.is_on_platform_left == False and player.is_on_platform_right == False:
-        #     player.GRAVITY += 1
-
-        all_sprites.update()
 
         window.fill((background_color))
 
