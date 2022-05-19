@@ -62,28 +62,6 @@ def level1(window):
 
         all_sprites.update()
 
-        # Resetando certas variáveis (serve para impedir que uma vez que elas fiquem True, não sejam True para sempre)
-        player.on_platform = False
-        player.is_on_platform_left = False
-        player.is_on_platform_right = False
-
-        platform_collision = pygame.sprite.spritecollide(player, all_platforms, False, pygame.sprite.collide_mask)
-        for hit in platform_collision:
-            if player.rect.bottom >= hit.rect.top and player.rect.top < hit.rect.top:
-                player.rect.bottom = hit.rect.top
-                player.on_platform = True
-                player.jumps = 0
-                player.GRAVITY = 0
-            elif player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.bottom:
-                player.rect.top = hit.rect.bottom
-                player.GRAVITY = 0
-            if player.rect.right >= hit.rect.left and player.rect.left < hit.rect.left and ((player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.top) or (player.rect.bottom > hit.rect.bottom and player.rect.top < hit.rect.bottom)):
-                player.rect.right = hit.rect.left
-                player.is_on_platform_left = True
-            elif player.rect.left <= hit.rect.right and player.rect.right > hit.rect.right and ((player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.top) or (player.rect.bottom > hit.rect.bottom and player.rect.top < hit.rect.bottom)):
-                player.rect.left = hit.rect.right
-                player.is_on_platform_right = True
-
         window.fill((background_color))
 
         if random.randint(1, 60) == 1:

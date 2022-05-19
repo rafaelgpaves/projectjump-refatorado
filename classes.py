@@ -65,6 +65,28 @@ class Player(pygame.sprite.Sprite):
             self.is_on_wall = False
             self.is_grounded = True
 
+        # Resetando certas variáveis (serve para impedir que uma vez que elas fiquem True, não sejam True para sempre)
+        self.on_platform = False
+        self.is_on_platform_left = False
+        self.is_on_platform_right = False
+
+        platform_collision = pygame.sprite.spritecollide(self, self.groups["all_platforms"], False, pygame.sprite.collide_mask)
+        for hit in platform_collision:
+            if self.rect.bottom >= hit.rect.top and self.rect.top < hit.rect.top:
+                self.rect.bottom = hit.rect.top
+                self.on_platform = True
+                self.jumps = 0
+                self.GRAVITY = 0
+            elif self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.bottom:
+                self.rect.top = hit.rect.bottom
+                self.GRAVITY = 0
+            if self.rect.right >= hit.rect.left and self.rect.left < hit.rect.left and ((self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.top) or (self.rect.bottom > hit.rect.bottom and self.rect.top < hit.rect.bottom)):
+                self.rect.right = hit.rect.left
+                self.is_on_platform_left = True
+            elif self.rect.left <= hit.rect.right and self.rect.right > hit.rect.right and ((self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.top) or (self.rect.bottom > hit.rect.bottom and self.rect.top < hit.rect.bottom)):
+                self.rect.left = hit.rect.right
+                self.is_on_platform_right = True
+
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         pygame.sprite.Sprite.__init__(self)
