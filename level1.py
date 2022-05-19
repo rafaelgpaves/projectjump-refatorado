@@ -23,7 +23,7 @@ def level1(window):
     all_sprites.add(player)
 
     for i in range(PLATFORM_NUMBER):
-        platform = Platform(groups, assets)
+        platform = Platform(groups, assets, random.randint(0, WIDTH), random.randint(0, HEIGHT))
         all_platforms.add(platform)
         all_sprites.add(platform)
 

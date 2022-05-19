@@ -10,8 +10,8 @@ HEIGHT = 700   # Altura da tela
 FPS = 45       # Frames por segundo
 
 # Define tamanhos
-PLAYER_WIDTH = 51
-PLAYER_HEIGHT = 51
+PLAYER_WIDTH = 52
+PLAYER_HEIGHT = 52
 PLATFORM_WIDTH = 200
 PLATFORM_HEIGHT = 150
 
@@ -25,7 +25,7 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
 # Quantidade de inimigos e outros
-PLATFORM_NUMBER = 1
+PLATFORM_NUMBER = 2
 
 # Estados do jogo
 INIT = 0

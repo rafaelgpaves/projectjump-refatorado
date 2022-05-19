@@ -18,6 +18,8 @@ class Player(pygame.sprite.Sprite):
         self.jumps = 0 # Variável que conta o numero de pulos que o jogador deu
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
 
+        self.min_up = PLAYER_HEIGHT/4 # Váriavel que guarda a distância máxima entre o topo da plataforma e o bottom do jogador para considerar que ele está em cima da plataforma
+
         self.is_on_wall = False # Variável que é True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
         self.is_grounded = True # Variável que é True se o jogador estiver no chão e False caso contrário
         self.on_platform = False # Variável que é True se o jogador estiver em cima de uma plataforma e False caso contrário
@@ -77,26 +79,26 @@ class Player(pygame.sprite.Sprite):
                 self.on_platform = True
                 self.jumps = 0
                 self.GRAVITY = 0
-            elif self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.bottom:
-                self.rect.top = hit.rect.bottom
-                self.GRAVITY = 0
-            if self.rect.right >= hit.rect.left and self.rect.left < hit.rect.left and ((self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.top) or (self.rect.bottom > hit.rect.bottom and self.rect.top < hit.rect.bottom)):
+            elif self.rect.right >= hit.rect.left and self.rect.left < hit.rect.left and ((self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.top) or (self.rect.bottom > hit.rect.bottom and self.rect.top < hit.rect.bottom)):
                 self.rect.right = hit.rect.left
                 self.is_on_platform_left = True
             elif self.rect.left <= hit.rect.right and self.rect.right > hit.rect.right and ((self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.top) or (self.rect.bottom > hit.rect.bottom and self.rect.top < hit.rect.bottom)):
                 self.rect.left = hit.rect.right
                 self.is_on_platform_right = True
+            elif self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.bottom:
+                self.rect.top = hit.rect.bottom
+                self.GRAVITY = 0
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, centerx, centery):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[PLATFORM]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
 
-        self.rect.centerx = WIDTH/2
-        self.rect.centery = HEIGHT/2
+        self.rect.centerx = centerx
+        self.rect.centery = centery
 
         self.groups = groups
         self.assets = assets
