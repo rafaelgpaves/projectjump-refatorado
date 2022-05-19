@@ -60,7 +60,7 @@ def level1(window):
 
         all_sprites.update()
 
-        player.platform_collision = False
+        player.on_platform = False
         player.is_on_platform_left = False
         player.is_on_platform_right = False
 
@@ -70,8 +70,9 @@ def level1(window):
             if player.rect.bottom >= hit.rect.top and player.rect.top < hit.rect.top:
                 # print('to aqui 1')
                 player.rect.bottom = hit.rect.top
-                player.platform_collision = True
+                player.on_platform = True
                 player.jumps = 0
+                player.GRAVITY = 0
             elif player.rect.top <= hit.rect.bottom and player.rect.bottom > hit.rect.bottom:
                 # print('to aqui 2')
                 player.rect.top = hit.rect.bottom

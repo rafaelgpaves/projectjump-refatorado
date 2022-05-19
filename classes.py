@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite):
 
         self.is_on_wall = False # Variável que é True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
         self.is_grounded = True
-        self.platform_collision = False
+        self.on_platform = False
         self.is_on_platform_right = False
         self.is_on_platform_left = False
 
@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
 
-        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.platform_collision == False:
+        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False:
             self.GRAVITY += 1
 
         self.rect.x += self.speedx
@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
             self.jumps = 0 # Resetando o numero de pulos
             self.GRAVITY = 5 # Menor gravidade para sensação de deslizamento
 
-        if self.rect.bottom >= HEIGHT or self.platform_collision == True:
+        if self.rect.bottom >= HEIGHT or self.on_platform == True:
             self.is_grounded = True
         else:
             self.is_grounded = False
