@@ -12,8 +12,8 @@ FPS = 45       # Frames por segundo
 # Define tamanhos
 PLAYER_WIDTH = 52
 PLAYER_HEIGHT = 52
-PLATFORM_WIDTH = 200
-PLATFORM_HEIGHT = 150
+PLATFORM_WIDTH = 150
+PLATFORM_HEIGHT = 100
 
 # Define cores
 WHITE = (255, 255, 255)

@@ -23,7 +23,7 @@ def level1(window):
     all_sprites.add(player)
 
     for i in range(PLATFORM_NUMBER):
-        platform = Platform(groups, assets, random.randint(0, WIDTH), random.randint(0, HEIGHT))
+        platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(0, HEIGHT-PLATFORM_HEIGHT))
         all_platforms.add(platform)
         all_sprites.add(platform)
 
@@ -59,6 +59,7 @@ def level1(window):
 
                     player.GRAVITY = -20 # Diminuir a gravidade é o que faz o jogador ir para cima
                     player.jumps += 1
+                    assets[JUMP_SFX].play()
 
         all_sprites.update()
 

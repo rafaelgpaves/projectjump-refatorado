@@ -4,6 +4,7 @@ from funcs import *
 from level1 import level1
 
 pygame.init()
+pygame.mixer.init()
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Nice")
