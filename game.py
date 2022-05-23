@@ -15,5 +15,3 @@ while state != QUIT:
         state = level1(window)
 
 pygame.quit()
-
-oi
