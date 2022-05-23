@@ -1,4 +1,4 @@
-import math
+import pygame, math, os
 
 def gira(lines, angle, amount):
     new_lines = lines.copy()

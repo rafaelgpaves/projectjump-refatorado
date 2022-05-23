@@ -8,10 +8,11 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 square_effects = []
 
 def level1(window):
-    cube_scroll = 0
     clock = pygame.time.Clock()
 
     assets = load_assets()
+
+    background = pygame.image.load("assets/images/background2.png")
 
     all_sprites = pygame.sprite.Group()
     all_platforms = pygame.sprite.Group()
@@ -21,6 +22,7 @@ def level1(window):
 
     player = Player(groups, assets)
     all_sprites.add(player)
+    cube_scroll = 0
 
     for i in range(PLATFORM_NUMBER):
         platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(0, HEIGHT-PLATFORM_HEIGHT))
@@ -31,6 +33,7 @@ def level1(window):
 
     running = True
     while running:
+        window.blit(background, (0, 0))
         clock.tick(FPS)
 
         for event in pygame.event.get():
@@ -62,8 +65,6 @@ def level1(window):
                     assets[JUMP_SFX].play()
 
         all_sprites.update()
-
-        window.fill((background_color))
 
         if random.randint(1, 60) == 1:
             square_effects.append([[random.randint(0, window.get_width()), - 90 + cube_scroll], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
