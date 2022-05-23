@@ -101,3 +101,48 @@ class Platform(pygame.sprite.Sprite):
 
         self.groups = groups
         self.assets = assets
+
+class Enemy_1(pygame.sprite.Sprite):
+    def __init__(self, groups, assets):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets[E1_teste]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect.centrex = WIDTH/2
+        self.rect.bottom = HEIGHT
+
+        self.speedx = 4
+
+        self.assets = assets
+        self.groups = groups
+
+    def update(self):
+        # Atualizando a posição do inimigo
+        self.rect.x += self.speedx
+
+        # Mantendo o inimigo dentro da tela
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+    
+    def puke(self):
+        enemy1_puke = ENEMY_1_PUKE(self.rect.centerx, self.rect.bottom)
+        
+
+
+    class ENEMY_1_PUKE(pygame.sprite.Sprite):
+        def __init__(self, x, y):
+            pygame.sprite.Sprite.__init__(self)
+            self.image = pygame.image.load("").convert()
+            self.rect = self.image.get_rect()
+            self.rect.bottom = y
+            self.rect.centerx = x
+            self speedx = 3
+        
+        def update(self):
+            self.rect.y += self.speedy
+            if self.rect.bottom > HEIGHT:
+                self.kill()
+            elif self.rect.centerx > WIDTH:
+                self.kill()

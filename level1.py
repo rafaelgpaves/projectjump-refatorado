@@ -83,6 +83,13 @@ def level1(window):
                 square_effects.pop(i)
             else:
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
+
+        font_timer = pygame.font.Font(None, 36)
+        passed_time = pygame.time.get_ticks()
+        seconds = passed_time // 1000
+
+        timer = font_timer.render(str(seconds), True, WHITE)
+        window.blit(timer, (WIDTH/2, HEIGHT - 25))
        
         all_sprites.draw(window)
 
