@@ -1,6 +1,7 @@
 import pygame
 from config import *
 from assets import *
+from funcs import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
