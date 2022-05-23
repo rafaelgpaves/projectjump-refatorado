@@ -10,6 +10,8 @@ square_effects = []
 def level1(window):
     clock = pygame.time.Clock()
 
+    total_time = pygame.time.get_ticks() # Variável que guarda o tempo total desde que o jogo foi iniciado
+
     assets = load_assets()
 
     background = pygame.image.load("assets/images/background2.png")
@@ -64,6 +66,10 @@ def level1(window):
                     player.jumps += 1
                     assets[JUMP_SFX].play()
 
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                    state = MENU
+
         all_sprites.update()
 
         if random.randint(1, 60) == 1:
@@ -84,9 +90,9 @@ def level1(window):
             else:
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
-        # Cronometro
+        # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
-        passed_time = pygame.time.get_ticks() # Variável que guarda o tempo que passou desde o começo do nível
+        passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
         seconds = passed_time // 1000 # Variável que guarda os segundos
         if seconds >= 60:
             seconds = seconds - 60*(minutes)
