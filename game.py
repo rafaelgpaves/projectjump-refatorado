@@ -16,4 +16,3 @@ while state != QUIT:
 
 pygame.quit()
 
-oi

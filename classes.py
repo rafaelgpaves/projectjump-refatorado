@@ -100,3 +100,9 @@ class Platform(pygame.sprite.Sprite):
 
         self.groups = groups
         self.assets = assets
+
+class Enemy_1(pygame.sprite.Sprite):
+    def __init__(self, groups, assets):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets
