@@ -8,7 +8,7 @@ pygame.init()
 pygame.mixer.init()
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Nice")
+pygame.display.set_caption("Just Jump")
 
 state = MENU
 while state != QUIT:
