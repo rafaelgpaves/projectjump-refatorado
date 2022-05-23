@@ -14,5 +14,9 @@ while state != QUIT:
     if state == LEVEL1:
         state = level1(window)
 
+<<<<<<< HEAD
 pygame.quit()
 
+=======
+pygame.quit()
+>>>>>>> 412147014baa3dd177156380572936ba94a45594
