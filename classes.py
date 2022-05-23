@@ -105,4 +105,25 @@ class Enemy_1(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets
+        self.image = assets[E1_teste]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect.centrex = WIDTH/2
+        self.rect.bottom = HEIGHT
+
+        self.speedx = 4
+
+        self.assets = assets
+        self.groups = groups
+
+    def update(self):
+        # Atualizando a posição do inimigo
+        self.rect.x += self.speedx
+
+        # Mantendo o inimigo dentro da tela
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+
+
+
