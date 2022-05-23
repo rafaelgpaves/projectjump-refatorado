@@ -1,6 +1,7 @@
 import pygame, random, math, sys
 from config import *
 from funcs import *
+from menu import menu
 from level1 import level1
 
 pygame.init()
@@ -9,14 +10,11 @@ pygame.mixer.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Nice")
 
-state = LEVEL1
+state = MENU
 while state != QUIT:
-    if state == LEVEL1:
+    if state == MENU:
+        state = menu(window)
+    elif state == LEVEL1:
         state = level1(window)
 
-<<<<<<< HEAD
 pygame.quit()
-
-=======
-pygame.quit()
->>>>>>> 412147014baa3dd177156380572936ba94a45594
