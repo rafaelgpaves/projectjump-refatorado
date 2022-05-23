@@ -34,6 +34,10 @@ def menu(screen):
                     state = LEVEL2
                     running = False
 
+                if inside_level_3 == True:
+                    state = LEVEL3
+                    running = False
+
         # Pegando a posição do mouse (e colocando numa tupla)
         mouse = pygame.mouse.get_pos()
 
@@ -57,10 +61,21 @@ def menu(screen):
         LEVEL2_TEXT = assets[MENU_FONT].render("LEVEL 2", True, WHITE)
         screen.blit(LEVEL2_TEXT, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS))
         if mouse[0] in range(LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_XPOS + LEVEL_BUTTON_WIDTH) and mouse[1] in range(LEVEL2_BUTTON_YPOS, LEVEL2_BUTTON_YPOS + LEVEL_BUTTON_HEIGHT):
-            inside_level_1 = True 
+            inside_level_2 = True 
             pygame.draw.rect(screen, LIGHT_BLUE, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
             LEVEL2_TEXT = assets[MENU_FONT].render("LEVEL 2", True, GRAY)
             screen.blit(LEVEL2_TEXT, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS))
+
+        # Botão para entrar no nível 3
+        inside_level_3 = False # variável 'True' se o mouse estiver dentro do botao do Nível 1 e 'False' caso contrário
+        pygame.draw.rect(screen, BLUE, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
+        LEVEL3_TEXT = assets[MENU_FONT].render("LEVEL 3", True, WHITE)
+        screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS))
+        if mouse[0] in range(LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_XPOS + LEVEL_BUTTON_WIDTH) and mouse[1] in range(LEVEL3_BUTTON_YPOS, LEVEL3_BUTTON_YPOS + LEVEL_BUTTON_HEIGHT):
+            inside_level_3 = True 
+            pygame.draw.rect(screen, LIGHT_BLUE, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
+            LEVEL3_TEXT = assets[MENU_FONT].render("LEVEL 3", True, GRAY)
+            screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS))
 
         # Invertendo o display
         pygame.display.flip()
