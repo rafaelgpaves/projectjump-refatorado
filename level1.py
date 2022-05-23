@@ -83,12 +83,11 @@ def level1(window):
             else:
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
-        font_timer = pygame.font.Font(None, 36)
-        passed_time = pygame.time.get_ticks()
-        seconds = passed_time // 1000
-
-        timer = font_timer.render(str(seconds), True, WHITE)
-        window.blit(timer, (WIDTH/2, HEIGHT - 25))
+        font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
+        passed_time = pygame.time.get_ticks() # Variável que guarda o tempo que passou desde o começo do nível
+        tempo = cronometro(passed_time)
+        timer = font_timer.render(tempo, True, WHITE)
+        window.blit(timer, (WIDTH/2, 25))
        
         all_sprites.draw(window)
 
