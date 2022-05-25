@@ -145,7 +145,7 @@ class Enemy_1(pygame.sprite.Sprite):
 
         e_ticks = n - self.last_puke
 
-        if e_ticks > self.shoot_ticks:
+        if e_ticks > self.puke_ticks:
 
             self.last_puke = n
             
