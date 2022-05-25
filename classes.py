@@ -126,10 +126,6 @@ class Enemy_1(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
     
-    def puke(self):
-        enemy1_puke = ENEMY_1_PUKE(self.rect.centerx, self.rect.bottom)
-        
-
 
     class ENEMY_1_PUKE(pygame.sprite.Sprite):
         def __init__(self, x, y):
@@ -146,3 +142,6 @@ class Enemy_1(pygame.sprite.Sprite):
                 self.kill()
             elif self.rect.centerx > WIDTH:
                 self.kill()
+        
+     def puke(self):
+        enemy1_puke = ENEMY_1_PUKE(self.rect.centerx, self.rect.bottom)
