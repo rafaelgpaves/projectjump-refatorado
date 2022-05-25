@@ -26,6 +26,10 @@ def level1(window):
     all_sprites.add(player)
     cube_scroll = 0
 
+    enemy1 = Enemy_1(groups, assets)
+    all_sprites.add(enemy1)
+    
+
     for i in range(PLATFORM_NUMBER):
         platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(0, HEIGHT-PLATFORM_HEIGHT))
         all_platforms.add(platform)
