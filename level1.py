@@ -66,6 +66,7 @@ def level1(window):
                     player.jumps += 1
                     assets[JUMP_SFX].play()
 
+                # Voltar ao menu
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     state = MENU
