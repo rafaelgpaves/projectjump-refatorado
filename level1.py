@@ -35,7 +35,6 @@ def level1(window):
 
     running = True
     while running:
-        window.blit(background, (0, 0))
 
         clock.tick(FPS)
 
@@ -67,12 +66,18 @@ def level1(window):
                     player.jumps += 1
                     assets[JUMP_SFX].play()
 
+                    # for platform in groups["all_platforms"]:
+                    #     platform.rect.bottom  += 20
+
                 # Voltar ao menu
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     state = MENU
             
         all_sprites.update()
+        # platform.move(player.rect.bottom)
+
+        window.fill(BLACK)
 
         if random.randint(1, 60) == 1:
             square_effects.append([[random.randint(0, window.get_width()), - 90 + cube_scroll], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
@@ -102,7 +107,7 @@ def level1(window):
         tempo = "{0}:{1}.{2}".format(minutes, seconds, str(passed_time)[-3:])
         timer = font_timer.render(tempo, True, WHITE)
         window.blit(timer, (WIDTH/2, 25))
-       
+          
         all_sprites.draw(window)
 
         pygame.display.update()

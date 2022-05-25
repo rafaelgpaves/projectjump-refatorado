@@ -88,13 +88,8 @@ class Player(pygame.sprite.Sprite):
                 self.rect.top = hit.rect.bottom
                 self.GRAVITY = 0
 
-class Background(pygame.sprite.Sprite):
-    def __init__(self, bgfile):
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = bgfile
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
+        for platform in self.groups["all_platforms"]:
+            platform.rect.centery  = (platform.rect.centery) + (HEIGHT - self.rect.bottom)
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets, centerx, centery):
