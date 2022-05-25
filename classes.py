@@ -118,7 +118,8 @@ class Enemy_1(pygame.sprite.Sprite):
 
         self.image = assets[E1_teste]
         self.mask = pygame.mask.from_surface(self.image)
-        self.rect.centrex = WIDTH/2
+        self.rect = self.image.get_rect()
+        self.rect.centerx = WIDTH/2
         self.rect.bottom = HEIGHT
 
         self.speedx = 4
@@ -153,7 +154,7 @@ class Enemy_1(pygame.sprite.Sprite):
             self.assets['JUMP_SFX'].play()
     
 
-    class ENEMY_1_PUKE(pygame.sprite.Sprite):
+class ENEMY_1_PUKE(pygame.sprite.Sprite):
         def __init__(self, x, y, groups, assets):
             pygame.sprite.Sprite.__init__(self)
             self.image = assets[PUKE]
