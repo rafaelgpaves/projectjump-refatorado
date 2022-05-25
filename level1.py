@@ -36,6 +36,7 @@ def level1(window):
     running = True
     while running:
         window.blit(background, (0, 0))
+
         clock.tick(FPS)
 
         for event in pygame.event.get():
@@ -69,7 +70,7 @@ def level1(window):
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     state = MENU
-
+            
         all_sprites.update()
 
         if random.randint(1, 60) == 1:
