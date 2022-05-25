@@ -1,3 +1,5 @@
+from multiprocessing.context import assert_spawning
+from xmlrpc.client import NOT_WELLFORMED_ERROR
 import pygame
 from config import *
 from assets import *
@@ -116,6 +118,9 @@ class Enemy_1(pygame.sprite.Sprite):
         self.assets = assets
         self.groups = groups
 
+        self.last_puke  = pygame.time.get_ticks()
+        self.puke_ticks = 700
+
     def update(self):
         # Atualizando a posição do inimigo
         self.rect.x += self.speedx
@@ -125,16 +130,32 @@ class Enemy_1(pygame.sprite.Sprite):
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+
+    def puke(self):
+        n = pygame.time.get_ticks()
+
+        e_ticks = n - self.last_puke
+
+        if e_ticks > self.shoot_ticks:
+
+            self.last_puke = n
+            
+            enemy1_puke = ENEMY_1_PUKE(self.assets, self.rect.bottomleft, self.rect.centerx)
+            self.assets['puke_e1'].add(enemy1_puke)
+            self.assets['JUMP_SFX'].play()
     
 
     class ENEMY_1_PUKE(pygame.sprite.Sprite):
-        def __init__(self, x, y):
+        def __init__(self, x, y, groups, assets):
             pygame.sprite.Sprite.__init__(self)
             self.image = assets[PUKE]
             self.rect = self.image.get_rect()
             self.rect.bottom = y
             self.rect.centerx = x
             self.speedx = 3
+
+            self.assets = assets
+            self.groups = groups 
         
         def update(self):
             self.rect.y += self.speedy
@@ -142,6 +163,4 @@ class Enemy_1(pygame.sprite.Sprite):
                 self.kill()
             elif self.rect.centerx > WIDTH:
                 self.kill()
-        
-    def puke(self):
-        enemy1_puke = ENEMY_1_PUKE(self.rect.centerx, self.rect.bottom)
+
