@@ -1,3 +1,5 @@
+# ===== Inicialização =====
+# --- Importando e inicializando pacotes
 import pygame, random, math, sys
 from config import *
 from funcs import *
@@ -7,6 +9,7 @@ from level1 import level1
 pygame.init()
 pygame.mixer.init()
 
+# --- Gerando a tela principal
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Project Jump")
 
@@ -17,4 +20,5 @@ while state != QUIT:
     elif state == LEVEL1:
         state = level1(window)
 
-pygame.quit()
+# ===== Finalização =====
+pygame.quit() # Função do pygame que finaliza os recursos inicializados
