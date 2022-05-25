@@ -138,7 +138,7 @@ class Enemy_1(pygame.sprite.Sprite):
     class ENEMY_1_PUKE(pygame.sprite.Sprite):
         def __init__(self, x, y):
             pygame.sprite.Sprite.__init__(self)
-            self.image = pygame.image.load("").convert()
+            self.image = assets[PUKE]
             self.rect = self.image.get_rect()
             self.rect.bottom = y
             self.rect.centerx = x
@@ -151,5 +151,5 @@ class Enemy_1(pygame.sprite.Sprite):
             elif self.rect.centerx > WIDTH:
                 self.kill()
         
-     def puke(self):
+    def puke(self):
         enemy1_puke = ENEMY_1_PUKE(self.rect.centerx, self.rect.bottom)
