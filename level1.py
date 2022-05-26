@@ -66,7 +66,7 @@ def level1(window):
                         player.is_on_platform_right = False
                         player.speedx = 7
 
-                    player.GRAVITY = -20 # Diminuir a gravidade é o que faz o jogador ir para cima
+                    player.GRAVITY = -15 # Diminuir a gravidade é o que faz o jogador ir para cima
                     player.jumps += 1
                     assets[JUMP_SFX].play()
 
