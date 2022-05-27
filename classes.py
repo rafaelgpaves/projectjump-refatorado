@@ -170,4 +170,3 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
                 self.kill()
             elif self.rect.centerx > WIDTH:
                 self.kill()
-
