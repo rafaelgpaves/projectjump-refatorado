@@ -1,5 +1,3 @@
-from multiprocessing.context import assert_spawning
-from xmlrpc.client import NOT_WELLFORMED_ERROR
 import pygame
 from config import *
 from assets import *
@@ -75,6 +73,8 @@ class Player(pygame.sprite.Sprite):
 
         platform_collision = pygame.sprite.spritecollide(self, self.groups["all_platforms"], False, pygame.sprite.collide_mask)
         for hit in platform_collision:
+            if self.rect.topright == hit.rect.bottomleft or self.rect.topleft == hit.rect.bottomright:
+                continue
             if self.rect.bottom >= hit.rect.top and self.rect.top < hit.rect.top:
                 self.rect.bottom = hit.rect.top
                 self.on_platform = True
@@ -89,6 +89,12 @@ class Player(pygame.sprite.Sprite):
             elif self.rect.top <= hit.rect.bottom and self.rect.bottom > hit.rect.bottom:
                 self.rect.top = hit.rect.bottom
                 self.GRAVITY = 0
+
+        for platform in self.groups["all_platforms"]:
+            if self.is_grounded == True or self.is_on_platform_left == True or self.is_on_platform_right == True:
+                continue
+            else:
+                platform.rect.centery -= self.GRAVITY
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):

@@ -33,7 +33,7 @@ def level1(window):
     all_enemies.add(enemy1)
 
     for i in range(PLATFORM_NUMBER):
-        platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(0, HEIGHT-PLATFORM_HEIGHT))
+        platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-800, HEIGHT-PLATFORM_HEIGHT))
         all_platforms.add(platform)
         all_sprites.add(platform)
 
@@ -69,7 +69,7 @@ def level1(window):
                         player.is_on_platform_right = False
                         player.speedx = 7
 
-                    player.GRAVITY = -20 # Diminuir a gravidade é o que faz o jogador ir para cima
+                    player.GRAVITY = -15 # Diminuir a gravidade é o que faz o jogador ir para cima
                     player.jumps += 1
                     assets[JUMP_SFX].play()
 
@@ -98,6 +98,8 @@ def level1(window):
             else:
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
+        all_sprites.draw(window)
+
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
@@ -108,8 +110,6 @@ def level1(window):
         tempo = "{0}:{1}.{2}".format(minutes, seconds, str(passed_time)[-3:])
         timer = font_timer.render(tempo, True, WHITE)
         window.blit(timer, (WIDTH/2, 25))
-       
-        all_sprites.draw(window)
 
         pygame.display.update()
 

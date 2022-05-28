@@ -42,7 +42,7 @@ YELLOW = (255, 255, 0)
 LIGHT_YELLOW = (150, 150, 0)
 
 # Quantidade de inimigos e outros
-PLATFORM_NUMBER = 2
+PLATFORM_NUMBER = 6
 
 # Estados do jogo
 INIT = 0
