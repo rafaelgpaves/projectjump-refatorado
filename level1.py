@@ -33,7 +33,7 @@ def level1(window):
     all_enemies.add(enemy1)
 
     for i in range(PLATFORM_NUMBER):
-        platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-800, HEIGHT-PLATFORM_HEIGHT))
+        platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
         all_platforms.add(platform)
         all_sprites.add(platform)
 
@@ -99,6 +99,24 @@ def level1(window):
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
         all_sprites.draw(window)
+
+        if player.rect.centery <= player.offset:
+            if player.is_grounded == True or player.is_on_platform_left == True or player.is_on_platform_right == True or player.is_on_wall == True:
+                continue
+            else:
+                player.rect.centery += abs(player.GRAVITY)
+                for platform in all_platforms:
+                    platform.rect.centery += abs(player.GRAVITY)
+
+        # if player.rect.centery >= HEIGHT - player.offset and player.up == True:
+        #     if player.is_grounded == True or player.is_on_platform_left == True or player.is_on_platform_right == True or player.is_on_wall == True:
+        #         continue
+        #     else:
+        #         player.up = False
+        #         player.rect.centery -= abs(player.GRAVITY)
+        #         for platform in all_platforms:
+        #             platform.rect.centery -= abs(player.GRAVITY)
+
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer

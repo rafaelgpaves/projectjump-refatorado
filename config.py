@@ -8,7 +8,7 @@ SND_DIR = path.join(path.dirname(__file__), "assets", "sounds") # Pasta de sons
 # Dados gerais do jogo
 WIDTH = 600    # Largura da tela
 HEIGHT = 700   # Altura da tela
-FPS = 45       # Frames por segundo
+FPS = 50       # Frames por segundo
 
 # Define tamanhos
 PLAYER_WIDTH = 52
@@ -42,7 +42,7 @@ YELLOW = (255, 255, 0)
 LIGHT_YELLOW = (150, 150, 0)
 
 # Quantidade de inimigos e outros
-PLATFORM_NUMBER = 6
+PLATFORM_NUMBER = 15
 
 # Estados do jogo
 INIT = 0

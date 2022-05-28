@@ -16,6 +16,8 @@ class Player(pygame.sprite.Sprite):
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
 
+        self.offset = 250
+
         self.jumps = 0 # Variável que conta o numero de pulos que o jogador deu
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
 
@@ -71,6 +73,7 @@ class Player(pygame.sprite.Sprite):
         self.is_on_platform_left = False
         self.is_on_platform_right = False
 
+        # Checando colisão com plataformas
         platform_collision = pygame.sprite.spritecollide(self, self.groups["all_platforms"], False, pygame.sprite.collide_mask)
         for hit in platform_collision:
             if self.rect.topright == hit.rect.bottomleft or self.rect.topleft == hit.rect.bottomright:
