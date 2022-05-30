@@ -14,8 +14,6 @@ def level1(window):
 
     assets = load_assets()
 
-    background = pygame.image.load("assets/images/background2.png")
-
     all_sprites = pygame.sprite.Group()
     all_platforms = pygame.sprite.Group()
     all_enemies = pygame.sprite.Group()
@@ -25,13 +23,25 @@ def level1(window):
     groups["all_platforms"] = all_platforms
     groups["all_enemies"] = all_enemies
 
+    background = pygame.image.load("assets/images/background.png")
+    bg = Background(background)
+    # all_sprites.add(bg)
+
     player = Player(groups, assets)
     all_sprites.add(player)
+    # player_bot = PlayerBottom(player.rect.bottom)
+
     cube_scroll = 0
 
     enemy1 = Enemy_1(groups, assets)
     all_enemies.add(enemy1)
 
+    # Plataforma inicial (a mais de baixo)
+    init_plat = Init_Platform(groups, assets, 0, HEIGHT)
+    all_platforms.add(init_plat)
+    all_sprites.add(init_plat)
+
+    # Outras plataformas
     for i in range(PLATFORM_NUMBER):
         platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
         all_platforms.add(platform)
@@ -41,7 +51,7 @@ def level1(window):
 
     running = True
     while running:
-        window.blit(background, (0, 0))
+        window.fill(BLACK)
 
         clock.tick(FPS)
 
@@ -100,23 +110,20 @@ def level1(window):
 
         all_sprites.draw(window)
 
+        # Fazendo tudo se mover para baixo quando o jogador se aproxima do topo
         if player.rect.centery <= player.offset:
             if player.is_grounded == True or player.is_on_platform_left == True or player.is_on_platform_right == True or player.is_on_wall == True:
                 continue
             else:
                 player.rect.centery += abs(player.GRAVITY)
+                # bg.rect.centery += abs(player.GRAVITY)
                 for platform in all_platforms:
                     platform.rect.centery += abs(player.GRAVITY)
 
-        # if player.rect.centery >= HEIGHT - player.offset and player.up == True:
-        #     if player.is_grounded == True or player.is_on_platform_left == True or player.is_on_platform_right == True or player.is_on_wall == True:
-        #         continue
-        #     else:
-        #         player.up = False
-        #         player.rect.centery -= abs(player.GRAVITY)
-        #         for platform in all_platforms:
-        #             platform.rect.centery -= abs(player.GRAVITY)
-
+        if player.rect.bottom >= HEIGHT - player.offset:
+            player.rect.centery -= abs(player.GRAVITY)
+            for platform in all_platforms:
+                platform.rect.centery -= abs(player.GRAVITY)
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer

@@ -11,12 +11,12 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.bottom = HEIGHT
+        self.rect.centery = HEIGHT/2
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
 
-        self.offset = 250
+        self.offset = HEIGHT/3
 
         self.jumps = 0 # Variável que conta o numero de pulos que o jogador deu
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
@@ -107,6 +107,8 @@ class Background(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
 
+        self.rect.bottom = HEIGHT
+
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets, centerx, centery):
         pygame.sprite.Sprite.__init__(self)
@@ -117,6 +119,20 @@ class Platform(pygame.sprite.Sprite):
 
         self.rect.centerx = centerx
         self.rect.centery = centery
+
+        self.groups = groups
+        self.assets = assets
+
+class Init_Platform(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, left, bottom):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets[INIT_PLAT]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+
+        self.rect.left = left
+        self.rect.bottom = bottom
 
         self.groups = groups
         self.assets = assets
