@@ -99,9 +99,7 @@ class Player(pygame.sprite.Sprite):
             else:
                 platform.rect.centery -= self.GRAVITY
 
-        spike_collision = pygame.sprite.spritecollide(self, self.groups["all_spikes"], False, pygame.sprite.collide_mask)
-        if len(spike_collision) > 0:
-            self.rect.bottom = HEIGHT - 100
+        
 
 
 class Background(pygame.sprite.Sprite):
