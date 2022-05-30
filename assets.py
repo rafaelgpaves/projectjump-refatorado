@@ -10,6 +10,7 @@ PLATFORM = "platform"
 INIT_PLAT = "init_plat"
 E1_teste = "enemy1"
 PUKE = "puke_e1"
+SPIKE = "spike"
 
 # Sons
 JUMP_SFX = "jump_sfx"
@@ -32,5 +33,8 @@ def load_assets():
     assets[E1_teste] = pygame.transform.scale(assets["enemy1"], (ENEMY_1_WIDTH, ENEMY_1_HEIGHT))
 
     assets[PUKE] = pygame.image.load(os.path.join(IMG_DIR, "laserRed16.png")).convert()
+
+    assets[SPIKE] = pygame.image.load(os.path.join(IMG_DIR, "spike.png")).convert()
+    assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 100))
 
     return assets

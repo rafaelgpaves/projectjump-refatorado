@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.centery = HEIGHT/2
+        self.rect.centery = HEIGHT - 100
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
@@ -98,6 +98,11 @@ class Player(pygame.sprite.Sprite):
                 continue
             else:
                 platform.rect.centery -= self.GRAVITY
+
+        spike_collision = pygame.sprite.spritecollide(self, self.groups["all_spikes"], False, pygame.sprite.collide_mask)
+        if len(spike_collision) > 0:
+            self.rect.bottom = HEIGHT - 100
+
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
@@ -199,3 +204,16 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
             elif self.rect.centerx > WIDTH:
                 self.kill()
 
+
+
+class Spike(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, x_pos, bottom):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = assets[SPIKE]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = x_pos
+        self.rect.bottom = bottom
+
+        self.assets = assets
+        self.groups = groups

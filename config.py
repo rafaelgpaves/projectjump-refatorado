@@ -47,6 +47,7 @@ LIGHT_YELLOW = (150, 150, 0)
 
 # Quantidade de inimigos e outros
 PLATFORM_NUMBER = 15
+SPIKE_NUMBER = 1
 
 # Estados do jogo
 INIT = 0

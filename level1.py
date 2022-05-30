@@ -17,11 +17,13 @@ def level1(window):
     all_sprites = pygame.sprite.Group()
     all_platforms = pygame.sprite.Group()
     #all_enemies = pygame.sprite.Group()
+    all_spikes = pygame.sprite.Group()
 
     groups = {}
     groups["all_sprites"] = all_sprites
     groups["all_platforms"] = all_platforms
     #groups["all_enemies"] = all_enemies
+    groups["all_spikes"] = all_spikes
 
     background = pygame.image.load("assets/images/background.png")
     bg = Background(background)
@@ -46,6 +48,11 @@ def level1(window):
         platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
         all_platforms.add(platform)
         all_sprites.add(platform)
+
+    for i in range(SPIKE_NUMBER):
+        spike = Spike(groups, assets, 600, 400)
+        all_spikes.add(spike)
+        all_sprites.add(spike)
 
     keys_down = {}
 
