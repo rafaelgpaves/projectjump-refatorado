@@ -46,36 +46,36 @@ def menu(screen):
 
         # Botão para entrar no nível 1
         inside_level_1 = False # variável 'True' se o mouse estiver dentro do botao do Nível 1 e 'False' caso contrário
-        pygame.draw.rect(screen, GREEN, (LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
+        pygame.draw.rect(screen, GRAY, (LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
         LEVEL1_TEXT = assets[MENU_FONT].render("LEVEL 1", True, WHITE)
-        screen.blit(LEVEL1_TEXT, (LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS))
+        screen.blit(LEVEL1_TEXT, (LEVEL1_BUTTON_XPOS + 7, LEVEL1_BUTTON_YPOS + 15))
         if mouse[0] in range(LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_XPOS + LEVEL_BUTTON_WIDTH) and mouse[1] in range(LEVEL1_BUTTON_YPOS, LEVEL1_BUTTON_YPOS + LEVEL_BUTTON_HEIGHT):
             inside_level_1 = True 
-            pygame.draw.rect(screen, LIGHT_GREEN, (LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
+            pygame.draw.rect(screen, DARK_GRAY, (LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
             LEVEL1_TEXT = assets[MENU_FONT].render("LEVEL 1", True, GRAY)
-            screen.blit(LEVEL1_TEXT, (LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS))
+            screen.blit(LEVEL1_TEXT, (LEVEL1_BUTTON_XPOS + 7, LEVEL1_BUTTON_YPOS + 15))
 
         # Botão para entrar no nível 2
         inside_level_2 = False # variável 'True' se o mouse estiver dentro do botao do Nível 2 e 'False' caso contrário
-        pygame.draw.rect(screen, BLUE, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
+        pygame.draw.rect(screen, DARK_BLUE, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
         LEVEL2_TEXT = assets[MENU_FONT].render("LEVEL 2", True, WHITE)
-        screen.blit(LEVEL2_TEXT, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS))
+        screen.blit(LEVEL2_TEXT, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS + 15))
         if mouse[0] in range(LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_XPOS + LEVEL_BUTTON_WIDTH) and mouse[1] in range(LEVEL2_BUTTON_YPOS, LEVEL2_BUTTON_YPOS + LEVEL_BUTTON_HEIGHT):
             inside_level_2 = True 
-            pygame.draw.rect(screen, LIGHT_BLUE, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
+            pygame.draw.rect(screen, DARKEST_BLUE, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
             LEVEL2_TEXT = assets[MENU_FONT].render("LEVEL 2", True, GRAY)
-            screen.blit(LEVEL2_TEXT, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS))
+            screen.blit(LEVEL2_TEXT, (LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS + 15))
 
         # Botão para entrar no nível 3
         inside_level_3 = False # variável 'True' se o mouse estiver dentro do botao do Nível 3 e 'False' caso contrário
         pygame.draw.rect(screen, RED, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
         LEVEL3_TEXT = assets[MENU_FONT].render("LEVEL 3", True, WHITE)
-        screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS))
+        screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS + 15))
         if mouse[0] in range(LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_XPOS + LEVEL_BUTTON_WIDTH) and mouse[1] in range(LEVEL3_BUTTON_YPOS, LEVEL3_BUTTON_YPOS + LEVEL_BUTTON_HEIGHT):
             inside_level_3 = True 
             pygame.draw.rect(screen, LIGHT_RED, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT))
             LEVEL3_TEXT = assets[MENU_FONT].render("LEVEL 3", True, GRAY)
-            screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS))
+            screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS + 15))
 
         # Invertendo o display
         pygame.display.flip()
