@@ -3,6 +3,7 @@
 import pygame, random, math, sys
 from config import *
 from funcs import *
+from init_screen import init_screen
 from menu import menu
 from level1 import level1
 
@@ -13,8 +14,10 @@ pygame.mixer.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Project Jump")
 
-state = MENU
+state = INIT
 while state != QUIT:
+    if state == INIT:
+        state = init_screen(window)
     if state == MENU:
         state = menu(window)
     elif state == LEVEL1:
