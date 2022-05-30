@@ -3,7 +3,7 @@ import os
 from config import *
 
 # Fontes
-MENU_FONT = "VampireWars"
+MENU_FONT = "soloist1"
 # Imagens
 PLAYER_IMG = "player"
 PLATFORM = "platform"
@@ -16,7 +16,7 @@ JUMP_SFX = "jump_sfx"
 def load_assets():
     assets = {}
 
-    assets[MENU_FONT] = pygame.font.Font(os.path.join(FNT_DIR, "VampireWars.ttf"), 40)
+    assets[MENU_FONT] = pygame.font.Font(os.path.join(FNT_DIR, "soloist1.ttf"), 40)
 
     assets[PLAYER_IMG] = pygame.image.load(os.path.join(IMG_DIR, "player.png")).convert()
     assets[PLAYER_IMG] = pygame.transform.scale(assets["player"], (PLAYER_WIDTH, PLAYER_HEIGHT))
