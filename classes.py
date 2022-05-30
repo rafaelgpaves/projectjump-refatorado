@@ -130,6 +130,7 @@ class Enemy_1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
         self.rect.bottom = HEIGHT
+        
 
         self.speedx = 4
 
