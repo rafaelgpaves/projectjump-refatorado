@@ -1,4 +1,3 @@
-from turtle import window_width
 import pygame
 from config import *
 from assets import *
