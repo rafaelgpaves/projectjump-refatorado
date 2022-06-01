@@ -18,7 +18,6 @@ def level1(window):
     all_platforms = pygame.sprite.Group()
     all_enemies = pygame.sprite.Group()
     all_pukes = pygame.sprite.Group()
-    #all_enemies = pygame.sprite.Group()
     all_spikes = pygame.sprite.Group()
 
     groups = {}
@@ -26,7 +25,6 @@ def level1(window):
     groups["all_platforms"] = all_platforms
     groups["all_enemies"] = all_enemies
     groups["all_pukes"] = all_pukes
-    #groups["all_enemies"] = all_enemies
     groups["all_spikes"] = all_spikes
 
     background = pygame.image.load("assets/images/background.png")
@@ -42,9 +40,9 @@ def level1(window):
     # Criando os inimigos
 
     for i in range(ENEMIES_NUMBER):
-        enemy1 = Enemy_1(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
-        all_enemies.add(enemy1)
-        all_sprites.add(enemy1)
+        ene_1 = Enemy_1(groups, assets, 0, HEIGHT)
+        all_enemies.add(ene_1)
+        all_sprites.add(ene_1)
 
     # Plataforma inicial (a mais de baixo)
     init_plat = Init_Platform(groups, assets, 0, HEIGHT)

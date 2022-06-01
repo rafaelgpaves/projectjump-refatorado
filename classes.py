@@ -1,3 +1,4 @@
+from turtle import window_width
 import pygame
 from config import *
 from assets import *
@@ -15,6 +16,7 @@ class Player(pygame.sprite.Sprite):
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
+        self.max_GRAVITY = 25 # Ter uma gravidade máxima é importante, pois gravidades muito altas fazem o jogador passar por dentro das plataformas
 
         self.offset = 300
 
@@ -32,7 +34,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
 
-        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False:
+        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False and self.GRAVITY < self.max_GRAVITY:
             self.GRAVITY += 1
 
         self.rect.x += self.speedx
@@ -105,7 +107,6 @@ class Player(pygame.sprite.Sprite):
             else:
                 spike.rect.centery -= self.GRAVITY
 
-
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
         pygame.sprite.Sprite.__init__(self)
@@ -145,18 +146,21 @@ class Init_Platform(pygame.sprite.Sprite):
         self.assets = assets
 
 class Enemy_1(pygame.sprite.Sprite):
-    def __init__(self, groups, assets, centerx, centery):
+    def __init__(self, groups, assets, x, y, pace=3, turn=70, speed= 90):           # vira em 98, pq 150 da plataforma - player width
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets[E1_teste]
+        self.image = assets["enemy1"]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH/2
-        self.rect.bottom = HEIGHT - 100
+
+        self.rect.center = (x, y)  # Onde está
+        self.pace_ta = pace       # Tamanho do passo
+        self.pace_c = 0           # distância percorrida
+        self.direction = -1        # Começa a ir para esquerda
+        self.turn = turn           # limitando a distância
+        self.speed = speed         # "intervalo de tempo" do passo
+        self.pace_t = 0         # tempo do último passo
         
-
-        self.speedx = 4
-
         self.assets = assets
         self.groups = groups
 
@@ -164,14 +168,25 @@ class Enemy_1(pygame.sprite.Sprite):
         self.puke_ticks = 700
 
     def update(self):
-        # Atualizando a posição do inimigo
-        self.rect.x += self.speedx
+        # Implementando o movimento correto agora
+        t_n = pygame.time.get_ticks()
+        if (t_n > self.pace_t + self.speed):
+            self.pace_t = t_n
 
-        # Mantendo o inimigo dentro da tela
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
+            self.pace_c += 1
+            self.rect.x  += self.direction * self.pace_ta
+
+            if(self.pace_c >= self.turn):
+                # girando para o outro lado
+                self.direction *= -1
+                self.pace_c = 0
+            
+            if(self.rect.x <= 0):
+                self.direction = 1
+                self.pace_c = 0
+            elif(self.rect.x >= WIDTH - self.rect.width):
+                self.direction = 1
+                self.pace_c = 0
 
     def puke(self):
         n = pygame.time.get_ticks()
