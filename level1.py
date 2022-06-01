@@ -18,19 +18,25 @@ def level1(window):
 
     all_sprites = pygame.sprite.Group()
     all_platforms = pygame.sprite.Group()
-    #all_enemies = pygame.sprite.Group()
+    all_enemies = pygame.sprite.Group()
+    all_pukes = pygame.sprite.Group()
 
     groups = {}
     groups["all_sprites"] = all_sprites
     groups["all_platforms"] = all_platforms
-    #groups["all_enemies"] = all_enemies
+    groups["all_enemies"] = all_enemies
+    groups["all_pukes"] = all_pukes
 
     player = Player(groups, assets)
     all_sprites.add(player)
     cube_scroll = 0
 
-    enemy1 = Enemy_1(groups, assets)
-    all_sprites.add(enemy1)
+    # Criando os inimigos
+
+    for i in range(ENEMIES_NUMBER):
+        enemy1 = Enemy_1(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
+        all_enemies.add(enemy1)
+        all_sprites.add(enemy1)
 
     for i in range(PLATFORM_NUMBER):
         platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
@@ -99,6 +105,29 @@ def level1(window):
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
         all_sprites.draw(window)
+
+        # Parte dos inimigos
+        all_enemies.update()
+
+        hits = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
+        for player in hits:
+            # som da morte do jogador: assets['destroy_sound'].play()
+            p = Player(assets, groups)
+            all_sprites.add(p)
+            #all_enemies.add(p)
+        hits = pygame.sprite.spritecollide(player, all_enemies, True, pygame.sprite.collide_mask)
+        if len(hits) > 0:
+            # adicionar parte de som
+            # assets
+            player.kill()
+            p = Player(assets, groups)
+            all_sprites.add(p)
+            # ao invés de explosion vai ser melt
+           
+            # sistema de derretimento do player
+            # estado do derretimento (pygamev19)
+
+        all_enemies.draw(window)
 
         if player.rect.centery <= player.offset:
             if player.is_grounded == True or player.is_on_platform_left == True or player.is_on_platform_right == True or player.is_on_wall == True:
