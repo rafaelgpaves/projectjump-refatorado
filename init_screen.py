@@ -60,6 +60,18 @@ def init_screen(window):
                     background_polygon_color = (48, 48, 48)
                     start_time = pygame.time.get_ticks()
 
+            title = assets[MENU_FONT].render("Project Jump", True, (255, 255, 255))
+            title_rect = title.get_rect()
+            title_rect.center = (window.get_width() / 2, window.get_height() / 2)
+            window.blit(title, title_rect)
+
+            ptp = assets[MENU_FONT].render("Pressione qualquer botão para jogar", True, (255, 255, 255))
+            ptp = pygame.transform.scale(ptp, (200, 10))
+            ptp_rect = ptp.get_rect()
+            ptp_rect.center = (window.get_width() / 2, window.get_height() / 2 + 50)
+            window.blit(ptp, ptp_rect)
+
+
         pygame.display.update()
     
     return state
