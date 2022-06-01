@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
 
-        self.offset = HEIGHT/3
+        self.offset = 300
 
         self.jumps = 0 # Variável que conta o numero de pulos que o jogador deu
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
