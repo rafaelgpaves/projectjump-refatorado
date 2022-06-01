@@ -111,6 +111,7 @@ def level1(window):
             
         all_sprites.update()
 
+        # Cubos!
         if random.randint(1, 60) == 1:
             square_effects.append([[random.randint(0, window.get_width()), - 90 + cube_scroll], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
 
