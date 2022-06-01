@@ -145,7 +145,7 @@ class Init_Platform(pygame.sprite.Sprite):
         self.assets = assets
 
 class Enemy_1(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, centerx, centery):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[E1_teste]
@@ -178,19 +178,24 @@ class Enemy_1(pygame.sprite.Sprite):
 
         e_ticks = n - self.last_puke
 
+        # e = elapsed
+
         if e_ticks > self.puke_ticks:
 
             self.last_puke = n
             
             enemy1_puke = ENEMY_1_PUKE(self.assets, self.rect.bottomleft, self.rect.centerx)
-            self.assets['puke_e1'].add(enemy1_puke)
-            self.assets['JUMP_SFX'].play()
+            self.groups['all_sprites'].add(enemy1_puke)
+            self.groups['all_bullets'].add(enemy1_puke)
+            ##? self.assets['puke_e1'].add(enemy1_puke)
+            #(parte de som) self.assets['JUMP_SFX'].play()
     
 
 class ENEMY_1_PUKE(pygame.sprite.Sprite):
         def __init__(self, x, y, groups, assets):
             pygame.sprite.Sprite.__init__(self)
-            self.image = assets[PUKE]
+            self.image = assets["puke_e1"]
+            self.mask = pygame.mask.from_surface(self.image)
             self.rect = self.image.get_rect()
             self.rect.bottom = y
             self.rect.centerx = x
@@ -200,7 +205,7 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
             self.groups = groups 
         
         def update(self):
-            self.rect.y += self.speedy
+            self.rect.x += self.speedy
             if self.rect.bottom > HEIGHT:
                 self.kill()
             elif self.rect.centerx > WIDTH:
