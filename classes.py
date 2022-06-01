@@ -146,7 +146,7 @@ class Init_Platform(pygame.sprite.Sprite):
         self.assets = assets
 
 class Enemy_1(pygame.sprite.Sprite):
-    def __init__(self, groups, assets, x, y, pace=4, turn=40, speed= 100):
+    def __init__(self, groups, assets, x, y, pace=3, turn=70, speed= 90):           # vira em 98, pq 150 da plataforma - player width
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets["enemy1"]
