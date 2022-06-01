@@ -11,12 +11,12 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.bottom = HEIGHT
+        self.rect.centery = HEIGHT - 100
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
 
-        self.offset = 250
+        self.offset = HEIGHT/3
 
         self.jumps = 0 # Variável que conta o numero de pulos que o jogador deu
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
@@ -99,6 +99,9 @@ class Player(pygame.sprite.Sprite):
             else:
                 platform.rect.centery -= self.GRAVITY
 
+        
+
+
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
         pygame.sprite.Sprite.__init__(self)
@@ -106,6 +109,8 @@ class Background(pygame.sprite.Sprite):
         self.image = bgfile
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
+
+        self.rect.bottom = HEIGHT
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets, centerx, centery):
@@ -117,6 +122,20 @@ class Platform(pygame.sprite.Sprite):
 
         self.rect.centerx = centerx
         self.rect.centery = centery
+
+        self.groups = groups
+        self.assets = assets
+
+class Init_Platform(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, left, bottom):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets[INIT_PLAT]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+
+        self.rect.left = left
+        self.rect.bottom = bottom
 
         self.groups = groups
         self.assets = assets
@@ -188,3 +207,16 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
             elif self.rect.centerx > WIDTH:
                 self.kill()
 
+
+
+class Spike(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, x_pos, bottom):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = assets[SPIKE]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = x_pos
+        self.rect.bottom = bottom
+
+        self.assets = assets
+        self.groups = groups
