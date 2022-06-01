@@ -49,15 +49,13 @@ def level1(window):
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
+    # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
     with open("plataformas1.txt", "r") as arquivo:
         plataformas = arquivo.readlines()
-        print(plataformas)
 
     # Outras plataformas
     for i in range(len(plataformas)):
-        # print(plataformas[i])
         plat = plataformas[i].split(",")
-        # print(int(plat[0]))
         platform = Platform(groups, assets, int(plat[0]), int(plat[1]))
         all_platforms.add(platform)
         all_sprites.add(platform)
