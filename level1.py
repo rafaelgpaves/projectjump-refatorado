@@ -43,9 +43,16 @@ def level1(window):
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
+    with open("plataformas1.txt", "r") as arquivo:
+        plataformas = arquivo.readlines()
+        print(plataformas)
+
     # Outras plataformas
-    for i in range(PLATFORM_NUMBER):
-        platform = Platform(groups, assets, random.randint(PLATFORM_WIDTH, WIDTH-PLATFORM_WIDTH), random.randint(-2500, HEIGHT-PLATFORM_HEIGHT))
+    for i in range(len(plataformas)):
+        # print(plataformas[i])
+        plat = plataformas[i].split(",")
+        # print(int(plat[0]))
+        platform = Platform(groups, assets, int(plat[0]), int(plat[1]))
         all_platforms.add(platform)
         all_sprites.add(platform)
 
@@ -127,11 +134,15 @@ def level1(window):
                 # bg.rect.centery += abs(player.GRAVITY)
                 for platform in all_platforms:
                     platform.rect.centery += abs(player.GRAVITY)
+                for s in all_spikes:
+                    s.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
             for platform in all_platforms:
                 platform.rect.centery -= abs(player.GRAVITY)
+            for s in all_spikes:
+                s.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)

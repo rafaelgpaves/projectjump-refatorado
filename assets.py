@@ -35,6 +35,6 @@ def load_assets():
     assets[PUKE] = pygame.image.load(os.path.join(IMG_DIR, "laserRed16.png")).convert()
 
     assets[SPIKE] = pygame.image.load(os.path.join(IMG_DIR, "spike.png")).convert()
-    assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 100))
+    assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 50))
 
     return assets
