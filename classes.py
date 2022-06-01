@@ -15,6 +15,7 @@ class Player(pygame.sprite.Sprite):
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
+        self.max_GRAVITY = 25 # Ter uma gravidade máxima é importante, pois gravidades muito altas fazem o jogador passar por dentro das plataformas
 
         self.offset = 300
 
@@ -32,7 +33,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
 
-        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False:
+        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False and self.GRAVITY < self.max_GRAVITY:
             self.GRAVITY += 1
 
         self.rect.x += self.speedx
@@ -105,7 +106,6 @@ class Player(pygame.sprite.Sprite):
             else:
                 spike.rect.centery -= self.GRAVITY
 
-
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
         pygame.sprite.Sprite.__init__(self)
@@ -152,9 +152,8 @@ class Enemy_1(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.bottom = HEIGHT - 100
+        self.rect.bottom = HEIGHT
         
-
         self.speedx = 4
 
         self.assets = assets
