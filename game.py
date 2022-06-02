@@ -6,6 +6,8 @@ from funcs import *
 from init_screen import init_screen
 from menu import menu
 from level1 import level1
+from level2 import level2
+from level3 import level3
 
 pygame.init()
 pygame.mixer.init()
@@ -22,6 +24,10 @@ while state != QUIT:
         state = menu(window)
     elif state == LEVEL1:
         state = level1(window)
+    elif state == LEVEL2:
+        state = level2(window)
+    elif state == LEVEL3:
+        state = level3(window)
 
 # ===== Finalização =====
 pygame.quit() # Função do pygame que finaliza os recursos inicializados
