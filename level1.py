@@ -29,6 +29,7 @@ def level1(window):
 
     background = pygame.image.load("assets/images/background.png")
     bg = Background(background)
+    background_polygon_color = (48, 48, 48)
     # all_sprites.add(bg)
 
     player = Player(groups, assets)
@@ -70,7 +71,7 @@ def level1(window):
 
     running = True
     while running:
-        window.fill(BLACK)
+        window.fill((0, 0, 0))
 
         clock.tick(FPS)
 

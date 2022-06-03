@@ -60,7 +60,3 @@ LEVEL2 = 3
 LEVEL3 = 4
 END_SCREEN = 5
 QUIT = 6
-
-# Background
-background_color = (0, 0, 0)
-background_polygon_color = (48, 48, 48)
