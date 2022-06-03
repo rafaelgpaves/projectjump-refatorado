@@ -4,14 +4,14 @@ from assets import *
 from funcs import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, plat_inicial_top):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[PLAYER_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.centery = HEIGHT - 100
+        self.rect.centery = plat_inicial_top
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)

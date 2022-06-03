@@ -32,10 +32,6 @@ def level1(window):
     background_polygon_color = (48, 48, 48)
     # all_sprites.add(bg)
 
-    player = Player(groups, assets)
-    all_sprites.add(player)
-    # player_bot = PlayerBottom(player.rect.bottom)
-
     cube_scroll = 0
 
     # Criando os inimigos
@@ -50,6 +46,11 @@ def level1(window):
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
+    # Jogador
+    player = Player(groups, assets, init_plat.rect.top)
+    all_sprites.add(player)
+    # player_bot = PlayerBottom(player.rect.bottom)
+
     # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
     with open("plataformas1.txt", "r") as arquivo:
         plataformas = arquivo.readlines()
@@ -63,7 +64,7 @@ def level1(window):
 
     # Espinhos
     for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, 400)
+        spike = Spike(groups, assets, 500, -100)
         all_spikes.add(spike)
         all_sprites.add(spike)
 
@@ -180,7 +181,7 @@ def level1(window):
             # player.rect.centerx = WIDTH/2
             # return LEVEL1
             player.kill()
-            player = Player(groups, assets)
+            player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
         # Cronômetro
@@ -188,7 +189,7 @@ def level1(window):
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
         seconds = passed_time // 1000 # Variável que guarda os segundos
         if seconds >= 60:
-            seconds = seconds - 60*(minutes)
+            seconds = seconds - 60*(int(minutes))
         minutes = passed_time // 60000 # Variável que guarda os minutos
         if seconds < 10:
             seconds = "0" + str(seconds)
