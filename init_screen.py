@@ -46,7 +46,7 @@ def init_screen(window):
             else:
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
-            if pygame.time.get_ticks() - start_time > 7000:
+            if pygame.time.get_ticks() - start_time > 9000:
                 if background_color == (0, 0, 0):
                     background_color = (0, 51, 102)
                     background_polygon_color = (0, 128, 255)
