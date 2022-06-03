@@ -187,6 +187,10 @@ def level1(window):
         if seconds >= 60:
             seconds = seconds - 60*(minutes)
         minutes = passed_time // 60000 # Variável que guarda os minutos
+        if seconds < 10:
+            seconds = "0" + str(seconds)
+        if minutes < 10:
+            minutes = "0" + str(minutes)
         tempo = "{0}:{1}.{2}".format(minutes, seconds, str(passed_time)[-3:])
         timer = font_timer.render(tempo, True, WHITE)
         window.blit(timer, (WIDTH/2, 25))
