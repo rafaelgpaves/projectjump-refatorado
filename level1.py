@@ -45,7 +45,7 @@ def level1(window):
         all_sprites.add(ene_1)
 
     # Plataforma inicial (a mais de baixo)
-    init_plat = Init_Platform(groups, assets, 0, HEIGHT)
+    init_plat = Init_Platform(groups, assets, 0, HEIGHT + 200)
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
@@ -177,7 +177,10 @@ def level1(window):
         if len(spike_collision) > 0:
             # player.rect.bottom = HEIGHT - 100
             # player.rect.centerx = WIDTH/2
-            return LEVEL1
+            # return LEVEL1
+            player.kill()
+            player = Player(groups, assets)
+            all_sprites.add(player)
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
