@@ -196,8 +196,11 @@ def level1(window):
             minutes = "0" + str(minutes)
         tempo = "{0}:{1}.{2}".format(minutes, seconds, str(passed_time)[-3:])
         timer = font_timer.render(tempo, True, WHITE)
-        window.blit(timer, (WIDTH/2, 25))
+        timer_rect = timer.get_rect()
+        timer_rect.centerx = WIDTH/2
+        timer_rect.top = 10
+        window.blit(timer, timer_rect)
 
         pygame.display.update()
 
-    return state
+    return state, tempo
