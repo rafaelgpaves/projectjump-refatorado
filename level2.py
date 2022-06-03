@@ -7,7 +7,7 @@ from funcs import *
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 square_effects = []
 
-def level1(window):
+def level2(window):
     clock = pygame.time.Clock()
 
     total_time = pygame.time.get_ticks() # Variável que guarda o tempo total desde que o jogo foi iniciado
@@ -29,7 +29,7 @@ def level1(window):
 
     background = pygame.image.load("assets/images/background.png")
     bg = Background(background)
-    background_polygon_color = (48, 48, 48)
+    background_polygon_color = (0, 128, 255)
     # all_sprites.add(bg)
 
     player = Player(groups, assets)
@@ -46,7 +46,7 @@ def level1(window):
         all_sprites.add(ene_1)
 
     # Plataforma inicial (a mais de baixo)
-    init_plat = Init_Platform(groups, assets, 0, HEIGHT + 200)
+    init_plat = Init_Platform(groups, assets, 0, HEIGHT)
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
@@ -71,7 +71,7 @@ def level1(window):
 
     running = True
     while running:
-        window.fill((0, 0, 0))
+        window.fill((0, 51, 102))
 
         clock.tick(FPS)
 
@@ -178,10 +178,7 @@ def level1(window):
         if len(spike_collision) > 0:
             # player.rect.bottom = HEIGHT - 100
             # player.rect.centerx = WIDTH/2
-            # return LEVEL1
-            player.kill()
-            player = Player(groups, assets)
-            all_sprites.add(player)
+            return LEVEL1
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
