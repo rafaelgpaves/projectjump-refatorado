@@ -42,7 +42,7 @@ def level1(window):
         all_sprites.add(ene_1)
 
     # Plataforma inicial (a mais de baixo)
-    init_plat = Init_Platform(groups, assets, 0, HEIGHT + 200)
+    init_plat = Init_Platform(groups, assets, 0, INIT_PLAT_START_TOP)
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
@@ -64,7 +64,7 @@ def level1(window):
 
     # Espinhos
     for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, -100)
+        spike = Spike(groups, assets, 500, -1000)
         all_spikes.add(spike)
         all_sprites.add(spike)
 
@@ -180,7 +180,15 @@ def level1(window):
             # player.rect.bottom = HEIGHT - 100
             # player.rect.centerx = WIDTH/2
             # return LEVEL1
+
             player.kill()
+
+            # Movendo tudo para cima de novo
+            y_moved = INIT_PLAT_START_TOP - init_plat.rect.top - 200
+            for platform in all_platforms:
+                platform.rect.centery -= abs(y_moved)
+            for s in all_spikes:
+                s.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
