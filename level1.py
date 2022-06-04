@@ -138,7 +138,7 @@ def level1(window):
         hits = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
         for player in hits:
             # som da morte do jogador: assets['destroy_sound'].play()
-            p = Player(assets, groups)
+            p = Player(assets, groups, init_plat.rect.top)
             all_sprites.add(p)
             #all_enemies.add(p)
         hits = pygame.sprite.spritecollide(player, all_enemies, True, pygame.sprite.collide_mask)
@@ -146,7 +146,7 @@ def level1(window):
             # adicionar parte de som
             # assets
             player.kill()
-            p = Player(assets, groups)
+            p = Player(assets, groups, init_plat.rect.top)
             all_sprites.add(p)
             # ao invés de explosion vai ser melt
            
@@ -184,7 +184,7 @@ def level1(window):
             player.kill()
 
             # Movendo tudo para cima de novo
-            y_moved = INIT_PLAT_START_TOP - init_plat.rect.top - 200
+            y_moved = INIT_PLAT_START_TOP - init_plat.rect.top - 300
             for platform in all_platforms:
                 platform.rect.centery -= abs(y_moved)
             for s in all_spikes:
