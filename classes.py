@@ -1,21 +1,21 @@
-from turtle import window_width
 import pygame
 from config import *
 from assets import *
 from funcs import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, plat_inicial_top):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[PLAYER_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.centery = HEIGHT - 100
+        self.rect.bottom = plat_inicial_top
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
+        self.max_GRAVITY = 25 # Ter uma gravidade máxima é importante, pois gravidades muito altas fazem o jogador passar por dentro das plataformas
 
         self.offset = 300
 
@@ -33,7 +33,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
 
-        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False:
+        if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False and self.GRAVITY < self.max_GRAVITY:
             self.GRAVITY += 1
 
         self.rect.x += self.speedx
@@ -105,7 +105,6 @@ class Player(pygame.sprite.Sprite):
                 continue
             else:
                 spike.rect.centery -= self.GRAVITY
-
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
@@ -232,6 +231,18 @@ class Spike(pygame.sprite.Sprite):
     def __init__(self, groups, assets, x_pos, bottom):
         pygame.sprite.Sprite.__init__(self)
         self.image = assets[SPIKE]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = x_pos
+        self.rect.bottom = bottom
+
+        self.assets = assets
+        self.groups = groups
+
+class Flag(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, x_pos, bottom):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = assets[FLAG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = x_pos

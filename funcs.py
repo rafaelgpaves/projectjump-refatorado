@@ -1,4 +1,5 @@
-import pygame, math, os
+import pygame, math
+import numpy as np
 
 def gira(lines, angle, amount):
     new_lines = lines.copy()
@@ -6,18 +7,14 @@ def gira(lines, angle, amount):
     new_lines[1] += math.sin(math.radians(angle)) * amount
     return new_lines
 
-def fadeout(width, height, window): 
-    fade = pygame.Surface((width, height))
-    fade.fill((0,0,0))
-    for alpha in range(300, 0):
-        fade.set_alpha(alpha)
-        window.blit(fade, (0,0))
-        pygame.time.delay(5)
+def fade_out(window, color, speed):
+    for alpha in np.arange(0, 255, speed):
+        window.fill((color[0], color[1], color[2], alpha))
+        pygame.display.update()
+        pygame.time.delay(1)
 
-def fadein(width, height, window): 
-    fade = pygame.Surface((width, height))
-    fade.fill((0,0,0))
-    for alpha in range(0, 300):
-        fade.set_alpha(alpha)
-        window.blit(fade, (0,0))
-        pygame.time.delay(5)
+def fade_in(window, color, speed):
+    for alpha in np.arange(255, 0, -speed):
+        window.fill((color[0], color[1], color[2], alpha))
+        pygame.display.update()
+        pygame.time.delay(1)

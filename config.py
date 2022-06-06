@@ -20,6 +20,8 @@ ENEMY_1_HEIGHT = 60
 #ENEMY_2_WIDTH = 60
 #ENEMY_2_HEIGHT = 60
 
+INIT_PLAT_START_TOP = HEIGHT + 200
+
 # Tamanhos de botões
 LEVEL_BUTTON_WIDTH = 180
 LEVEL_BUTTON_HEIGHT = 70
@@ -60,7 +62,3 @@ LEVEL2 = 3
 LEVEL3 = 4
 END_SCREEN = 5
 QUIT = 6
-
-# Background
-background_color = (0, 0, 0)
-background_polygon_color = (48, 48, 48)
