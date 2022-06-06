@@ -61,9 +61,13 @@ def level2(window):
         all_platforms.add(platform)
         all_sprites.add(platform)
 
+    with open("spikes2.txt", "r") as arquivo:
+        spikes = arquivo.readlines()
+
     # Espinhos
-    for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, 400)
+    for i in range(len(spikes)):
+        coords = spikes[i].split(",")
+        spike = Spike(groups, assets, int(coords[0]), int(coords[1]))
         all_spikes.add(spike)
         all_sprites.add(spike)
 
@@ -176,9 +180,16 @@ def level2(window):
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
-            # player.rect.bottom = HEIGHT - 100
-            # player.rect.centerx = WIDTH/2
-            return LEVEL1
+            player.kill()
+
+            # Movendo tudo para cima de novo
+            y_moved = INIT_PLAT_START_TOP - init_plat.rect.top - 300
+            for platform in all_platforms:
+                platform.rect.centery -= abs(y_moved)
+            for s in all_spikes:
+                s.rect.centery -= abs(y_moved)
+            player = Player(groups, assets, init_plat.rect.top)
+            all_sprites.add(player)
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
