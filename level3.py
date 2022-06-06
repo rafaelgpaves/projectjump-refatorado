@@ -32,10 +32,6 @@ def level3(window):
     background_polygon_color = (204, 0, 0)
     # all_sprites.add(bg)
 
-    player = Player(groups, assets)
-    all_sprites.add(player)
-    # player_bot = PlayerBottom(player.rect.bottom)
-
     cube_scroll = 0
 
     # Criando os inimigos
@@ -50,8 +46,12 @@ def level3(window):
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
+    # Jogador
+    player = Player(groups, assets, init_plat.rect.top)
+    all_sprites.add(player)
+
     # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
-    with open("plataformas1.txt", "r") as arquivo:
+    with open("plataformas3.txt", "r") as arquivo:
         plataformas = arquivo.readlines()
 
     # Outras plataformas
@@ -61,9 +61,13 @@ def level3(window):
         all_platforms.add(platform)
         all_sprites.add(platform)
 
+    with open("spikes3.txt", "r") as arquivo:
+        spikes = arquivo.readlines()
+
     # Espinhos
-    for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, 400)
+    for i in range(len(spikes)):
+        coords = spikes[i].split(",")
+        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
         all_spikes.add(spike)
         all_sprites.add(spike)
 
