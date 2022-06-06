@@ -19,6 +19,7 @@ def level1(window):
     all_enemies = pygame.sprite.Group()
     all_pukes = pygame.sprite.Group()
     all_spikes = pygame.sprite.Group()
+    all_flags = pygame.sprite.Group()
 
     groups = {}
     groups["all_sprites"] = all_sprites
@@ -26,6 +27,7 @@ def level1(window):
     groups["all_enemies"] = all_enemies
     groups["all_pukes"] = all_pukes
     groups["all_spikes"] = all_spikes
+    groups["all_flags"] = all_flags
 
     background = pygame.image.load("assets/images/background.png")
     bg = Background(background)
@@ -68,9 +70,9 @@ def level1(window):
         all_spikes.add(spike)
         all_sprites.add(spike)
 
-    # Chegada
-    finish_line = Finish(assets, -4850)
-    all_sprites.add(finish_line)
+    # Flag
+    flag = Flag(groups, assets, HEIGHT/2, -4675)
+    all_flags.add(flag)
 
     keys_down = {}
 
@@ -84,8 +86,8 @@ def level1(window):
 
             # Sair do jogo
             if event.type == pygame.QUIT:
-                state = QUIT
                 running = False
+                state = QUIT
 
             if event.type == pygame.KEYDOWN:
                 keys_down[event.key] = True
@@ -114,6 +116,7 @@ def level1(window):
                     state = MENU
             
         all_sprites.update()
+        all_flags.update()
 
         # Cubos!
         if random.randint(1, 60) == 1:
@@ -135,6 +138,7 @@ def level1(window):
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
         all_sprites.draw(window)
+        all_flags.draw(window)
 
         # Parte dos inimigos
         all_enemies.update()
@@ -170,7 +174,7 @@ def level1(window):
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
-                finish_line.rect.centery += abs(player.GRAVITY)
+                flag.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -178,7 +182,7 @@ def level1(window):
                 platform.rect.centery -= abs(player.GRAVITY)
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
-            finish_line.rect.centery -= abs(player.GRAVITY)
+            flag.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
@@ -198,8 +202,11 @@ def level1(window):
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
-        # Checando se o jogador tocou na linha de chegada
-
+        # Fim do level
+        if len(pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask)) > 0:
+            running = False
+            state = END_SCREEN
+        
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
