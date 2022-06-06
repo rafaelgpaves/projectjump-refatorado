@@ -71,7 +71,7 @@ def level1(window):
         all_sprites.add(spike)
 
     # Flag
-    flag = Flag(groups, assets, 525, -4635)
+    flag = Flag(groups, assets, HEIGHT/2, -4675)
     all_flags.add(flag)
 
     keys_down = {}
@@ -86,8 +86,8 @@ def level1(window):
 
             # Sair do jogo
             if event.type == pygame.QUIT:
-                state = QUIT
                 running = False
+                state = QUIT
 
             if event.type == pygame.KEYDOWN:
                 keys_down[event.key] = True
@@ -116,6 +116,7 @@ def level1(window):
                     state = MENU
             
         all_sprites.update()
+        all_flags.update()
 
         # Cubos!
         if random.randint(1, 60) == 1:
@@ -200,7 +201,7 @@ def level1(window):
             all_sprites.add(player)
 
         # Fim do level
-        if pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask):
+        if len(pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask)) > 0:
             running = False
             state = END_SCREEN
         
