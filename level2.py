@@ -32,10 +32,6 @@ def level2(window):
     background_polygon_color = (0, 128, 255)
     # all_sprites.add(bg)
 
-    player = Player(groups, assets)
-    all_sprites.add(player)
-    # player_bot = PlayerBottom(player.rect.bottom)
-
     cube_scroll = 0
 
     # Criando os inimigos
@@ -46,12 +42,16 @@ def level2(window):
         all_sprites.add(ene_1)
 
     # Plataforma inicial (a mais de baixo)
-    init_plat = Init_Platform(groups, assets, 0, HEIGHT)
+    init_plat = Init_Platform(groups, assets, 0, INIT_PLAT_START_TOP)
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
+    # Jogador
+    player = Player(groups, assets, init_plat.rect.top)
+    all_sprites.add(player)
+
     # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
-    with open("plataformas1.txt", "r") as arquivo:
+    with open("plataformas2.txt", "r") as arquivo:
         plataformas = arquivo.readlines()
 
     # Outras plataformas

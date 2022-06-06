@@ -66,7 +66,7 @@ def level1(window):
 
     # Espinhos
     for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, -1000)
+        spike = Spike(groups, assets, 500, -800)
         all_spikes.add(spike)
         all_sprites.add(spike)
 
@@ -142,23 +142,25 @@ def level1(window):
         # Parte dos inimigos
         all_enemies.update()
 
-        hits = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
-        for player in hits:
+        puke_hit = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
+        if len(puke_hit) > 0:
             # som da morte do jogador: assets['destroy_sound'].play()
             p = Player(assets, groups, init_plat.rect.top)
             all_sprites.add(p)
             #all_enemies.add(p)
-        hits = pygame.sprite.spritecollide(player, all_enemies, True, pygame.sprite.collide_mask)
-        if len(hits) > 0:
+            return LEVEL1
+            
+        enemy_hit = pygame.sprite.spritecollide(player, all_enemies, True, pygame.sprite.collide_mask)
+        if len(enemy_hit) > 0:
             # adicionar parte de som
             # assets
             player.kill()
             p = Player(assets, groups, init_plat.rect.top)
             all_sprites.add(p)
             # ao invés de explosion vai ser melt
-           
             # sistema de derretimento do player
             # estado do derretimento (pygamev19)
+            return LEVEL1
 
         all_enemies.draw(window)
 
@@ -173,6 +175,7 @@ def level1(window):
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
+                flag.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -180,6 +183,7 @@ def level1(window):
                 platform.rect.centery -= abs(player.GRAVITY)
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
+            flag.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)

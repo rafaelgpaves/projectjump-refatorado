@@ -153,12 +153,12 @@ class Enemy_1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.rect.center = (x, y)  # Onde está
-        self.pace_ta = pace       # Tamanho do passo
-        self.pace_c = 0           # distância percorrida
+        self.pace_ta = pace        # Tamanho do passo
+        self.pace_c = 0            # distância percorrida
         self.direction = -1        # Começa a ir para esquerda
         self.turn = turn           # limitando a distância
         self.speed = speed         # "intervalo de tempo" do passo
-        self.pace_t = 0         # tempo do último passo
+        self.pace_t = 0            # tempo do último passo
         
         self.assets = assets
         self.groups = groups
