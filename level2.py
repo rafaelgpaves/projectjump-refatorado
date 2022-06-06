@@ -67,7 +67,7 @@ def level2(window):
     # Espinhos
     for i in range(len(spikes)):
         coords = spikes[i].split(",")
-        spike = Spike(groups, assets, int(coords[0]), int(coords[1]))
+        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
         all_spikes.add(spike)
         all_sprites.add(spike)
 
