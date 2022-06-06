@@ -19,6 +19,7 @@ def level1(window):
     all_enemies = pygame.sprite.Group()
     all_pukes = pygame.sprite.Group()
     all_spikes = pygame.sprite.Group()
+    all_flags = pygame.sprite.Group()
 
     groups = {}
     groups["all_sprites"] = all_sprites
@@ -26,6 +27,7 @@ def level1(window):
     groups["all_enemies"] = all_enemies
     groups["all_pukes"] = all_pukes
     groups["all_spikes"] = all_spikes
+    groups["all_flags"] = all_flags
 
     background = pygame.image.load("assets/images/background.png")
     bg = Background(background)
@@ -67,6 +69,10 @@ def level1(window):
         spike = Spike(groups, assets, 500, -1000)
         all_spikes.add(spike)
         all_sprites.add(spike)
+
+    # Flag
+    flag = Flag(groups, assets, 525, -4635)
+    all_flags.add(flag)
 
     keys_down = {}
 
@@ -131,6 +137,7 @@ def level1(window):
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
         all_sprites.draw(window)
+        all_flags.draw(window)
 
         # Parte dos inimigos
         all_enemies.update()
@@ -192,6 +199,11 @@ def level1(window):
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
+        # Fim do level
+        if pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask):
+            running = False
+            state = END_SCREEN
+        
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível

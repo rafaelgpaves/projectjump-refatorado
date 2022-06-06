@@ -11,6 +11,7 @@ INIT_PLAT = "init_plat"
 E1_teste = "enemy1"
 PUKE = "puke_e1"
 SPIKE = "spike"
+FLAG = "flag"
 
 # Sons
 JUMP_SFX = "jump_sfx"
@@ -36,5 +37,7 @@ def load_assets():
 
     assets[SPIKE] = pygame.image.load(os.path.join(IMG_DIR, "spike.png")).convert()
     assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 50))
+
+    assets[FLAG] = pygame.image.load(os.path.join(IMG_DIR, "flag.png")).convert()
 
     return assets
