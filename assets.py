@@ -39,5 +39,6 @@ def load_assets():
     assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 50))
 
     assets[FLAG] = pygame.image.load(os.path.join(IMG_DIR, "flag.png")).convert()
+    assets[FLAG] = pygame.transform.scale(assets["flag"], (52, 65))
 
     return assets

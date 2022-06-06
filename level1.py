@@ -116,7 +116,6 @@ def level1(window):
                     state = MENU
             
         all_sprites.update()
-        all_flags.update()
 
         # Cubos!
         if random.randint(1, 60) == 1:
