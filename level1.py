@@ -64,9 +64,13 @@ def level1(window):
 
     # Espinhos
     for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, -1000)
+        spike = Spike(groups, assets, 500, -800)
         all_spikes.add(spike)
         all_sprites.add(spike)
+
+    # Chegada
+    finish_line = Finish(assets, -4850)
+    all_sprites.add(finish_line)
 
     keys_down = {}
 
@@ -166,6 +170,7 @@ def level1(window):
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
+                finish_line.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -173,6 +178,7 @@ def level1(window):
                 platform.rect.centery -= abs(player.GRAVITY)
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
+            finish_line.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
@@ -191,6 +197,8 @@ def level1(window):
                 s.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
+
+        # Checando se o jogador tocou na linha de chegada
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer

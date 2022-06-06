@@ -238,3 +238,11 @@ class Spike(pygame.sprite.Sprite):
 
         self.assets = assets
         self.groups = groups
+
+class Finish(pygame.sprite.Sprite):
+    def __init__(self, assets, centery):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = assets[FINISH_LINE]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centery = centery
