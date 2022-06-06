@@ -63,6 +63,17 @@ def level1(window):
         platform = Platform(groups, assets, int(plat[0]), int(plat[1]))
         all_platforms.add(platform)
         all_sprites.add(platform)
+    
+    # Abrindo o arquivo com as coordenadas dos inimigos do nível 1
+    with open('posenem.txt', 'r') as arquivo:
+        inimigo1 = arquivo.readlines()
+    
+    # Gerando os outros inimigos
+    for i in range(len(inimigo1)):
+        enem = inimigo1[i].split(',')
+        enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
+        all_enemies.add(enemy)
+        all_sprites.add(enemy)
 
     # Espinhos
     for i in range(SPIKE_NUMBER):
@@ -176,6 +187,8 @@ def level1(window):
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
                 flag.rect.centery += abs(player.GRAVITY)
+                enemy.rect.centery += abs(player.GRAVITY)
+
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -184,6 +197,7 @@ def level1(window):
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
             flag.rect.centery -= abs(player.GRAVITY)
+            enemy.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
