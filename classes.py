@@ -234,13 +234,16 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
 
 
 class Spike(pygame.sprite.Sprite):
-    def __init__(self, groups, assets, x_pos, bottom):
+    def __init__(self, groups, assets, x_pos, bottom, rotacao):
         pygame.sprite.Sprite.__init__(self)
         self.image = assets[SPIKE]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
+
         self.rect.centerx = x_pos
         self.rect.bottom = bottom
+
+        self.image = pygame.transform.rotate(assets[SPIKE], rotacao)
 
         self.assets = assets
         self.groups = groups

@@ -23,7 +23,7 @@ def load_assets():
 
     assets[PLAYER_IMG] = pygame.image.load(os.path.join(IMG_DIR, "player.png")).convert()
     assets[PLAYER_IMG] = pygame.transform.scale(assets["player"], (PLAYER_WIDTH, PLAYER_HEIGHT))
-    assets[PLATFORM] = pygame.image.load(os.path.join(IMG_DIR, "ok_platform.png")).convert()
+    assets[PLATFORM] = pygame.image.load(os.path.join(IMG_DIR, "ok_platform.png")).convert_alpha()
     assets[PLATFORM] = pygame.transform.scale(assets["platform"], (PLATFORM_WIDTH, PLATFORM_HEIGHT))
     assets[INIT_PLAT] = pygame.image.load(os.path.join(IMG_DIR, "init_plat.png")).convert()
     assets[INIT_PLAT] = pygame.transform.scale(assets["init_plat"], (800, 200))
@@ -35,7 +35,7 @@ def load_assets():
 
     assets[PUKE] = pygame.image.load(os.path.join(IMG_DIR, "laserRed16.png")).convert()
 
-    assets[SPIKE] = pygame.image.load(os.path.join(IMG_DIR, "ok_spike.png")).convert()
+    assets[SPIKE] = pygame.image.load(os.path.join(IMG_DIR, "ok_spike.png")).convert_alpha()
     assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 50))
 
     assets[FLAG] = pygame.image.load(os.path.join(IMG_DIR, "flag.png")).convert()
