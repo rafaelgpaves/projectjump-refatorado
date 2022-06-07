@@ -112,6 +112,12 @@ class Player(pygame.sprite.Sprite):
             else:
                 platform.rect.centery -= self.GRAVITY
 
+        for flag in self.groups["all_flags"]:
+            if self.is_grounded == True or self.is_on_platform_left == True or self.is_on_platform_right == True:
+                continue
+            else:
+                flag.rect.centery -= self.GRAVITY
+
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
         pygame.sprite.Sprite.__init__(self)
