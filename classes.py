@@ -4,14 +4,14 @@ from assets import *
 from funcs import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, plat_inicial_top):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[PLAYER_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH/2
-        self.rect.centery = HEIGHT - 100
+        self.rect.bottom = plat_inicial_top
 
         self.speedx = 7 # Velocidade horizontal do jogador
         self.GRAVITY = 0 # Gravidade (começa em 0)
@@ -106,6 +106,18 @@ class Player(pygame.sprite.Sprite):
             else:
                 spike.rect.centery -= self.GRAVITY
 
+        for platform in self.groups["all_enemies"]:
+            if self.is_grounded == True or self.is_on_platform_left == True or self.is_on_platform_right == True:
+                continue
+            else:
+                platform.rect.centery -= self.GRAVITY
+
+        for flag in self.groups["all_flags"]:
+            if self.is_grounded == True or self.is_on_platform_left == True or self.is_on_platform_right == True:
+                continue
+            else:
+                flag.rect.centery -= self.GRAVITY
+
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
         pygame.sprite.Sprite.__init__(self)
@@ -153,12 +165,12 @@ class Enemy_1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.rect.center = (x, y)  # Onde está
-        self.pace_ta = pace       # Tamanho do passo
-        self.pace_c = 0           # distância percorrida
+        self.pace_ta = pace        # Tamanho do passo
+        self.pace_c = 0            # distância percorrida
         self.direction = -1        # Começa a ir para esquerda
         self.turn = turn           # limitando a distância
         self.speed = speed         # "intervalo de tempo" do passo
-        self.pace_t = 0         # tempo do último passo
+        self.pace_t = 0            # tempo do último passo
         
         self.assets = assets
         self.groups = groups
@@ -228,9 +240,24 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
 
 
 class Spike(pygame.sprite.Sprite):
-    def __init__(self, groups, assets, x_pos, bottom):
+    def __init__(self, groups, assets, x_pos, bottom, rotacao):
         pygame.sprite.Sprite.__init__(self)
         self.image = assets[SPIKE]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+
+        self.rect.centerx = x_pos
+        self.rect.bottom = bottom
+
+        self.image = pygame.transform.rotate(assets[SPIKE], rotacao)
+
+        self.assets = assets
+        self.groups = groups
+
+class Flag(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, x_pos, bottom):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = assets[FLAG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = x_pos

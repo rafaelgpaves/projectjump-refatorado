@@ -32,10 +32,6 @@ def level2(window):
     background_polygon_color = (0, 128, 255)
     # all_sprites.add(bg)
 
-    player = Player(groups, assets)
-    all_sprites.add(player)
-    # player_bot = PlayerBottom(player.rect.bottom)
-
     cube_scroll = 0
 
     # Criando os inimigos
@@ -46,12 +42,16 @@ def level2(window):
         all_sprites.add(ene_1)
 
     # Plataforma inicial (a mais de baixo)
-    init_plat = Init_Platform(groups, assets, 0, HEIGHT)
+    init_plat = Init_Platform(groups, assets, 0, INIT_PLAT_START_TOP)
     all_platforms.add(init_plat)
     all_sprites.add(init_plat)
 
+    # Jogador
+    player = Player(groups, assets, init_plat.rect.top)
+    all_sprites.add(player)
+
     # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
-    with open("plataformas1.txt", "r") as arquivo:
+    with open("plataformas2.txt", "r") as arquivo:
         plataformas = arquivo.readlines()
 
     # Outras plataformas
@@ -61,9 +61,13 @@ def level2(window):
         all_platforms.add(platform)
         all_sprites.add(platform)
 
+    with open("spikes2.txt", "r") as arquivo:
+        spikes = arquivo.readlines()
+
     # Espinhos
-    for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 500, 400)
+    for i in range(len(spikes)):
+        coords = spikes[i].split(",")
+        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
         all_spikes.add(spike)
         all_sprites.add(spike)
 
@@ -176,20 +180,34 @@ def level2(window):
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
-            # player.rect.bottom = HEIGHT - 100
-            # player.rect.centerx = WIDTH/2
-            return LEVEL1
+            player.kill()
+
+            # Movendo tudo para cima de novo
+            y_moved = INIT_PLAT_START_TOP - init_plat.rect.top - 300
+            for platform in all_platforms:
+                platform.rect.centery -= abs(y_moved)
+            for s in all_spikes:
+                s.rect.centery -= abs(y_moved)
+            player = Player(groups, assets, init_plat.rect.top)
+            all_sprites.add(player)
 
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
         seconds = passed_time // 1000 # Variável que guarda os segundos
         if seconds >= 60:
-            seconds = seconds - 60*(minutes)
+            seconds = seconds - 60*(int(minutes))
         minutes = passed_time // 60000 # Variável que guarda os minutos
+        if seconds < 10:
+            seconds = "0" + str(seconds)
+        if minutes < 10:
+            minutes = "0" + str(minutes)
         tempo = "{0}:{1}.{2}".format(minutes, seconds, str(passed_time)[-3:])
         timer = font_timer.render(tempo, True, WHITE)
-        window.blit(timer, (WIDTH/2, 25))
+        timer_rect = timer.get_rect()
+        timer_rect.centerx = WIDTH/2
+        timer_rect.top = 10
+        window.blit(timer, timer_rect)
 
         pygame.display.update()
 
