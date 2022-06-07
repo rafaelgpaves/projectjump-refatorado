@@ -196,11 +196,18 @@ def level3(window):
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
         seconds = passed_time // 1000 # Variável que guarda os segundos
         if seconds >= 60:
-            seconds = seconds - 60*(minutes)
+            seconds = seconds - 60*(int(minutes))
         minutes = passed_time // 60000 # Variável que guarda os minutos
+        if seconds < 10:
+            seconds = "0" + str(seconds)
+        if minutes < 10:
+            minutes = "0" + str(minutes)
         tempo = "{0}:{1}.{2}".format(minutes, seconds, str(passed_time)[-3:])
         timer = font_timer.render(tempo, True, WHITE)
-        window.blit(timer, (WIDTH/2, 25))
+        timer_rect = timer.get_rect()
+        timer_rect.centerx = WIDTH/2
+        timer_rect.top = 10
+        window.blit(timer, timer_rect)
 
         pygame.display.update()
 
