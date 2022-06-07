@@ -188,7 +188,7 @@ def level1(window):
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
         seconds = passed_time // 1000 # Variável que guarda os segundos
         if seconds >= 60:
-            seconds = seconds - 60*(minutes)
+            seconds = int(seconds) - 60*(int(minutes))
         minutes = passed_time // 60000 # Variável que guarda os minutos
         if seconds < 10:
             seconds = "0" + str(seconds)
