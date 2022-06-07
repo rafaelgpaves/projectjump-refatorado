@@ -106,6 +106,12 @@ class Player(pygame.sprite.Sprite):
             else:
                 spike.rect.centery -= self.GRAVITY
 
+        for platform in self.groups["all_enemies"]:
+            if self.is_grounded == True or self.is_on_platform_left == True or self.is_on_platform_right == True:
+                continue
+            else:
+                platform.rect.centery -= self.GRAVITY
+
 class Background(pygame.sprite.Sprite):
     def __init__(self, bgfile):
         pygame.sprite.Sprite.__init__(self)

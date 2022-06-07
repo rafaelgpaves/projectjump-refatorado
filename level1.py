@@ -125,7 +125,7 @@ def level1(window):
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     state = MENU
-            
+        
         all_sprites.update()
 
         # Cubos!
@@ -161,17 +161,23 @@ def level1(window):
             #all_enemies.add(p)
             return LEVEL1
             
-        enemy_hit = pygame.sprite.spritecollide(player, all_enemies, True, pygame.sprite.collide_mask)
+        enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(enemy_hit) > 0:
             # adicionar parte de som
             # assets
             player.kill()
-            p = Player(assets, groups, init_plat.rect.top)
-            all_sprites.add(p)
             # ao invés de explosion vai ser melt
             # sistema de derretimento do player
             # estado do derretimento (pygamev19)
-            return LEVEL1
+            y_moved1 = INIT_PLAT_START_TOP - init_plat.rect.top - 300
+            for platform in all_platforms:
+                platform.rect.centery -= abs(y_moved1)
+            for enemy in all_enemies:
+                enemy.rect.centery -= abs(y_moved1)
+            for s in all_spikes:
+                s.rect.centery -= abs(y_moved1)
+            player = Player(groups, assets, init_plat.rect.top)
+            all_sprites.add(player)
 
         all_enemies.draw(window)
 
@@ -187,7 +193,8 @@ def level1(window):
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
                 flag.rect.centery += abs(player.GRAVITY)
-                enemy.rect.centery += abs(player.GRAVITY)
+                for enemy in all_enemies:
+                    enemy.rect.centery += abs(player.GRAVITY)
 
 
         if player.rect.bottom >= HEIGHT - player.offset:
