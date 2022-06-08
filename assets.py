@@ -12,6 +12,9 @@ E1_teste = "enemy1"
 PUKE = "puke_e1"
 SPIKE = "spike"
 FLAG = "flag"
+THSTARS = "3stars"
+TWSTARS = "2stars"
+OSTAR = "1star"
 
 # Sons
 JUMP_SFX = "jump_sfx"
@@ -40,5 +43,9 @@ def load_assets():
 
     assets[FLAG] = pygame.image.load(os.path.join(IMG_DIR, "flag.png")).convert()
     assets[FLAG] = pygame.transform.scale(assets["flag"], (52, 65))
+
+    assets[THSTARS] = pygame.image.load(os.path.join(IMG_DIR, "3stars.png")).convert()
+    assets[TWSTARS] = pygame.image.load(os.path.join(IMG_DIR, "2stars.png")).convert_alpha()
+    assets[OSTAR] = pygame.image.load(os.path.join(IMG_DIR, "1star.png")).convert_alpha()
 
     return assets
