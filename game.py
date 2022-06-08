@@ -24,8 +24,9 @@ while state != QUIT:
     if state == MENU:
         state = menu(window)
     elif state == LEVEL1:
-        state = level1(window)[0]
-        tempo = level1(window)[1]
+        lvl1 = level1(window)
+        state = lvl1[0]
+        tempo = lvl1[1]
         if state == END_SCREEN:
             state = game_over(window, level1, tempo)
     elif state == LEVEL2:

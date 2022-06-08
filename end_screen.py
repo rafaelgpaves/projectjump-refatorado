@@ -2,7 +2,7 @@ import pygame
 import random
 from config import *
 from funcs import *
-from assets import MENU_FONT, load_assets
+from assets import *
 
 def game_over(window, level, tempo):
     background_color = (0, 0, 0)
@@ -44,25 +44,28 @@ def game_over(window, level, tempo):
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
 
-        text = MENU_FONT.render("Seu tempo foi: " + str(tempo), True, (255, 255, 255))
+        text = assets[MENU_FONT].render("Seu tempo foi: " + str(tempo), True, (255, 255, 255))
         text_rect = text.get_rect()
         text_rect.center = (WIDTH / 2, HEIGHT / 2)
         text_rect.top = text_rect.top - 100
         window.blit(text, text_rect)
 
         msm = tempo.split(":")
+        if len(msm) <= 2:
+            while len(msm) != 3:
+                msm.insert(0, "00")
         minutos = msm[0]
         segundos = msm[1]
-        milesimos = msm[2]
 
-    """ if level == "level1":
-    if int(segundos) < 35:
-
-    elif level == "level2":
-        
-    elif level == "level3": """
+    if level == "level1":
+        if int(segundos) < 45 and minutos == 0:
+            window.blit(assets[THSTARS], (WIDTH / 2 - assets[THSTARS].get_width() / 2, HEIGHT / 2 - assets[THSTARS].get_height() / 2))
+        elif int(segundos) < 59 and minutos == 0:
+            window.blit(assets[TWSTARS], (WIDTH / 2 - assets[TWSTARS].get_width() / 2, HEIGHT / 2 - assets[TWSTARS].get_height() / 2))
+        elif minutos >= 1:
+            window.blit(assets[OSTAR], (WIDTH / 2 - assets[OSTAR].get_width() / 2, HEIGHT / 2 - assets[OSTAR].get_height() / 2))
             
 
 
-    """ pygame.display.update()
-    return state """
+        pygame.display.update()
+    return state
