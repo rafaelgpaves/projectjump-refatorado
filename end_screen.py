@@ -56,7 +56,7 @@ def game_over(window, level, tempo):
         tempotxt_rect.top = tempotxt_rect.top - 250
         window.blit(tempotxt, tempotxt_rect)
 
-
+        tempo = tempo.replace(".", ":")
         msm = tempo.split(":")
         if len(msm) <= 2:
             while len(msm) != 3:
@@ -64,17 +64,27 @@ def game_over(window, level, tempo):
         minutos = msm[0]
         segundos = msm[1]
 
-        three_stars = pygame.image.load("assets/images/3stars.png")
-        two_stars = pygame.image.load("assets/images/2stars.png")
-        one_star = pygame.image.load("assets/images/1star.png")
+        three_stars = pygame.image.load("assets/images/3stars.png").convert_alpha()
+        three_stars = pygame.transform.scale(three_stars, (300, 300))
+        two_stars = pygame.image.load("assets/images/2stars.png").convert_alpha()
+        two_stars = pygame.transform.scale(two_stars, (300, 300))
+        one_star = pygame.image.load("assets/images/1star.png").convert_alpha()
+        one_star = pygame.transform.scale(one_star, (300, 300))
+
         if level == "level1":
             if int(segundos) < 45 and int(minutos) == 0:
-                window.blit(three_stars, (WIDTH / 2, HEIGHT / 2))
+                window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
             elif int(segundos) < 59 and int(minutos) == 0:
-                window.blit(two_stars, (WIDTH / 2, HEIGHT / 2))
-            elif minutos >= 1:
-                window.blit(one_star, (WIDTH / 2, HEIGHT / 2))
+                window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
+            elif int(minutos) >= 1:
+                window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
 
+        botao = assets[MENU_FONT].render("Pressione qualquer botão!", True, (255, 255, 255))
+        botao = pygame.transform.scale(botao, (250, 20))
+        botao_rect = botao.get_rect()
+        botao_rect.center = (WIDTH / 2, HEIGHT / 2)
+        botao_rect.top = botao_rect.top + 300
+        window.blit(botao, botao_rect)
 
         pygame.display.update()
     return state
