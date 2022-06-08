@@ -84,7 +84,7 @@ def game_over(window, level, tempo):
                 window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
             elif int(segundos) < 55 and int(minutos) == 0:
                 window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
-            elif int(minutos) >= 55 or minutos >= 1:
+            elif int(minutos) >= 55 or int(minutos) >= 1:
                 window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
 
         if level == "level3":
