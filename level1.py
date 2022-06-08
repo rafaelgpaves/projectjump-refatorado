@@ -208,7 +208,8 @@ def level1(window):
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
             flag.rect.centery -= abs(player.GRAVITY)
-            enemy.rect.centery -= abs(player.GRAVITY)
+            for enemy in all_enemies:
+                enemy.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
