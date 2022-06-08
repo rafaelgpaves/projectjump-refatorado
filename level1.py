@@ -219,6 +219,8 @@ def level1(window):
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved)
             flag.rect.centery -= abs(y_moved)
+            for enemy in all_enemies:
+                enemy.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
