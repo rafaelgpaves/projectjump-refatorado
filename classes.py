@@ -165,9 +165,6 @@ class Enemy_1(pygame.sprite.Sprite):
         self.assets = assets
         self.groups = groups
 
-        self.last_puke  = pygame.time.get_ticks()
-        self.puke_ticks = 700
-
     def update(self):
         # Implementando o movimento correto agora
         t_n = pygame.time.get_ticks()
@@ -188,44 +185,6 @@ class Enemy_1(pygame.sprite.Sprite):
             elif(self.rect.x >= WIDTH - self.rect.width):
                 self.direction = 1
                 self.pace_c = 0
-
-    def puke(self):
-        n = pygame.time.get_ticks()
-
-        e_ticks = n - self.last_puke
-
-        # e = elapsed
-
-        if e_ticks > self.puke_ticks:
-
-            self.last_puke = n
-            
-            enemy1_puke = ENEMY_1_PUKE(self.assets, self.rect.bottomleft, self.rect.centerx)
-            self.groups['all_sprites'].add(enemy1_puke)
-            self.groups['all_bullets'].add(enemy1_puke)
-            ##? self.assets['puke_e1'].add(enemy1_puke)
-            #(parte de som) self.assets['JUMP_SFX'].play()
-    
-
-class ENEMY_1_PUKE(pygame.sprite.Sprite):
-        def __init__(self, x, y, groups, assets):
-            pygame.sprite.Sprite.__init__(self)
-            self.image = assets["puke_e1"]
-            self.mask = pygame.mask.from_surface(self.image)
-            self.rect = self.image.get_rect()
-            self.rect.bottom = y
-            self.rect.centerx = x
-            self.speedx = 3
-
-            self.assets = assets
-            self.groups = groups 
-        
-        def update(self):
-            self.rect.x += self.speedy
-            if self.rect.bottom > HEIGHT:
-                self.kill()
-            elif self.rect.centerx > WIDTH:
-                self.kill()
 
 class Spike(pygame.sprite.Sprite):
     def __init__(self, groups, assets, x_pos, bottom, rotacao):

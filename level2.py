@@ -152,12 +152,6 @@ def level2(window, dificuldade):
         # Parte dos inimigos
         all_enemies.update()
 
-        hits = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
-        for player in hits:
-            # som da morte do jogador: assets['destroy_sound'].play()
-            p = Player(assets, groups)
-            all_sprites.add(p)
-            #all_enemies.add(p)
         hits = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(hits) > 0:
             assets[DEATH_SFX].play()

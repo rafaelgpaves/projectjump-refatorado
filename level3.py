@@ -154,12 +154,10 @@ def level3(window, dificuldade):
 
         enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(enemy_hit) > 0:
-            # adicionar parte de som
-            # assets
+            assets[DEATH_SFX].play()
+
             player.kill()
-            # ao invés de explosion vai ser melt
-            # sistema de derretimento do player
-            # estado do derretimento (pygamev19)
+            
             y_moved1 = INIT_PLAT_START_TOP - init_plat.rect.top - 300
             for platform in all_platforms:
                 platform.rect.centery -= abs(y_moved1)
@@ -172,8 +170,6 @@ def level3(window, dificuldade):
             all_sprites.add(player)
 
         all_enemies.draw(window)
-
-        
 
         # Fazendo tudo se mover para baixo quando o jogador se aproxima do topo
         if player.rect.centery <= player.offset:

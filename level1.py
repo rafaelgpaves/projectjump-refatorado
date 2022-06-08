@@ -153,23 +153,14 @@ def level1(window, dificuldade):
 
         # Parte dos inimigos
         all_enemies.update()
-
-        puke_hit = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
-        if len(puke_hit) > 0:
-            # som da morte do jogador: assets['destroy_sound'].play()
-            p = Player(assets, groups, init_plat.rect.top)
-            all_sprites.add(p)
-            #all_enemies.add(p)
-            return LEVEL1
             
         enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(enemy_hit) > 0:
-            # adicionar parte de som
-            # assets
+
+            assets[DEATH_SFX].play()
+            
             player.kill()
-            # ao invés de explosion vai ser melt
-            # sistema de derretimento do player
-            # estado do derretimento (pygamev19)
+            
             y_moved1 = INIT_PLAT_START_TOP - init_plat.rect.top - 300
             for platform in all_platforms:
                 platform.rect.centery -= abs(y_moved1)
@@ -196,7 +187,6 @@ def level1(window, dificuldade):
                 flag.rect.centery += abs(player.GRAVITY)
                 for enemy in all_enemies:
                     enemy.rect.centery += abs(player.GRAVITY)
-
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
