@@ -8,7 +8,7 @@ MENU_FONT = "soloist1"
 PLAYER_IMG = "player"
 PLATFORM = "platform"
 INIT_PLAT = "init_plat"
-E1_teste = "enemy1"
+E1 = "enemy1"
 PUKE = "puke_e1"
 SPIKE = "spike"
 FLAG = "flag"
@@ -33,8 +33,8 @@ def load_assets():
 
     assets[JUMP_SFX] = pygame.mixer.Sound(os.path.join(SND_DIR, "jump_sfx.mp3"))
 
-    assets[E1_teste] = pygame.image.load(os.path.join(IMG_DIR, "goomba.png")).convert_alpha()
-    assets[E1_teste] = pygame.transform.scale(assets["enemy1"], (ENEMY_1_WIDTH, ENEMY_1_HEIGHT))
+    assets[E1] = pygame.image.load(os.path.join(IMG_DIR, "paragoomba.png")).convert_alpha()
+    assets[E1] = pygame.transform.scale(assets["enemy1"], (ENEMY_1_WIDTH, ENEMY_1_HEIGHT))
 
     assets[PUKE] = pygame.image.load(os.path.join(IMG_DIR, "laserRed16.png")).convert()
 
