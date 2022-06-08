@@ -148,25 +148,28 @@ def level3(window):
         # Parte dos inimigos
         all_enemies.update()
 
-        hits = pygame.sprite.groupcollide(all_enemies, all_pukes, True, True, pygame.sprite.collide_mask) # (all_enemies, all_pukes, True, True, pygame.sprite.collide_mask)
-        for player in hits:
-            # som da morte do jogador: assets['destroy_sound'].play()
-            p = Player(assets, groups)
-            all_sprites.add(p)
-            #all_enemies.add(p)
-        hits = pygame.sprite.spritecollide(player, all_enemies, True, pygame.sprite.collide_mask)
-        if len(hits) > 0:
+        enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
+        if len(enemy_hit) > 0:
             # adicionar parte de som
             # assets
             player.kill()
-            p = Player(assets, groups)
-            all_sprites.add(p)
             # ao invés de explosion vai ser melt
-           
             # sistema de derretimento do player
             # estado do derretimento (pygamev19)
+            y_moved1 = INIT_PLAT_START_TOP - init_plat.rect.top - 300
+            for platform in all_platforms:
+                platform.rect.centery -= abs(y_moved1)
+            for enemy in all_enemies:
+                enemy.rect.centery -= abs(y_moved1)
+            for s in all_spikes:
+                s.rect.centery -= abs(y_moved1)
+            flag.rect.centery -= abs(y_moved1)
+            player = Player(groups, assets, init_plat.rect.top)
+            all_sprites.add(player)
 
         all_enemies.draw(window)
+
+        
 
         # Fazendo tudo se mover para baixo quando o jogador se aproxima do topo
         if player.rect.centery <= player.offset:
@@ -179,6 +182,8 @@ def level3(window):
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
                 flag.rect.centery += abs(player.GRAVITY)
+                for e in all_enemies:
+                    e.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -187,6 +192,8 @@ def level3(window):
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
             flag.rect.centery -= abs(player.GRAVITY)
+            for e in all_enemies:
+                e.rect.centery += abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
