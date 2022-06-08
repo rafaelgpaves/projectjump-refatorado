@@ -77,7 +77,8 @@ def level3(window):
 
     keys_down = {}
 
-    pygame.mixer.music.load((os.path.join(SND_DIR, "level3_music.mp3")))
+    pygame.mixer.music.load(os.path.join(SND_DIR, "level3_music.mp3"))
+    pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
     running = True
     while running:
@@ -201,6 +202,11 @@ def level3(window):
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
+        # Fim do level
+        if len(pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask)) > 0:
+            running = False
+            state = END_SCREEN
+
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
@@ -221,4 +227,4 @@ def level3(window):
 
         pygame.display.update()
 
-    return state
+    return state, tempo

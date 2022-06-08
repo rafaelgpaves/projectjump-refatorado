@@ -71,14 +71,19 @@ def level1(window):
         all_enemies.add(enemy)
         all_sprites.add(enemy)
 
+    # Abrindo o arquivo com as coordenadas dos espinhos do nível 1
+    with open("spikes1.txt", "r") as arquivo:
+        spikes = arquivo.readlines()
+
     # Espinhos
-    for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 530, -800, 0)
+    for i in range(len(spikes)):
+        coords = spikes[i].split(",")
+        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
         all_spikes.add(spike)
         all_sprites.add(spike)
 
     # Flag
-    flag = Flag(groups, assets, HEIGHT/2, -4675)
+    flag = Flag(groups, assets, 525, -4675)
     all_flags.add(flag)
 
     keys_down = {}
@@ -175,6 +180,7 @@ def level1(window):
                 enemy.rect.centery -= abs(y_moved1)
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved1)
+            flag.rect.centery -= abs(y_moved1)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
@@ -202,7 +208,8 @@ def level1(window):
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
             flag.rect.centery -= abs(player.GRAVITY)
-            enemy.rect.centery -= abs(player.GRAVITY)
+            for enemy in all_enemies:
+                enemy.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
@@ -218,6 +225,7 @@ def level1(window):
                 platform.rect.centery -= abs(y_moved)
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved)
+            flag.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
