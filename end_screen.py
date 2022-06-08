@@ -79,6 +79,22 @@ def game_over(window, level, tempo):
             elif int(minutos) >= 1:
                 window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
 
+        if level == "level2":
+            if int(segundos) < 40 and int(minutos) == 0:
+                window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
+            elif int(segundos) < 55 and int(minutos) == 0:
+                window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
+            elif int(minutos) >= 55 or minutos >= 1:
+                window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
+
+        if level == "level3":
+            if int(minutos) <= 1 or (int(minutos) == 1 and int(segundos) == 0):
+                window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
+            elif int(minutos) == 1 and int(segundos) < 40:
+                window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
+            else:
+                window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
+
         botao = assets[MENU_FONT].render("Pressione qualquer botão!", True, (255, 255, 255))
         botao = pygame.transform.scale(botao, (250, 20))
         botao_rect = botao.get_rect()

@@ -30,11 +30,15 @@ while state != QUIT:
         if state == END_SCREEN:
             state = game_over(window, "level1", tempo)
     elif state == LEVEL2:
-        state = level2(window)[0]
+        lvl2 = level2(window)
+        state = lvl2[0]
+        tempo = lvl2[1]
         if state == END_SCREEN:
             state = game_over(window, "level2", tempo)
     elif state == LEVEL3:
-        state = level3(window)[0]
+        lvl3 = level3(window)
+        state = lvl3[0]
+        tempo = lvl3[1]
         if state == END_SCREEN:
             state = game_over(window, "level3", tempo)
 

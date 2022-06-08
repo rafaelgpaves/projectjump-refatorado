@@ -202,6 +202,11 @@ def level3(window):
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
+        # Fim do level
+        if len(pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask)) > 0:
+            running = False
+            state = END_SCREEN
+
         # Cronômetro
         font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
         passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
@@ -222,4 +227,4 @@ def level3(window):
 
         pygame.display.update()
 
-    return state
+    return state, tempo
