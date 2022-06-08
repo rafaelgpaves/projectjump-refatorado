@@ -84,6 +84,7 @@ def level1(window):
     keys_down = {}
 
     pygame.mixer.music.load((os.path.join(SND_DIR, "level1_music.mp3")))
+    pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
     running = True
     while running:
@@ -206,6 +207,8 @@ def level1(window):
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
+
+            assets[DEATH_SFX].play()
 
             player.kill()
 

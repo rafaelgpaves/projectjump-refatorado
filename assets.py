@@ -15,9 +15,9 @@ FLAG = "flag"
 THSTARS = "3stars"
 TWSTARS = "2stars"
 OSTAR = "1star"
-
 # Sons
 JUMP_SFX = "jump_sfx"
+DEATH_SFX = "death_sfx"
 
 def load_assets():
     assets = {}
@@ -32,6 +32,8 @@ def load_assets():
     assets[INIT_PLAT] = pygame.transform.scale(assets["init_plat"], (800, 200))
 
     assets[JUMP_SFX] = pygame.mixer.Sound(os.path.join(SND_DIR, "jump_sfx.mp3"))
+    assets[DEATH_SFX] = pygame.mixer.Sound(os.path.join(SND_DIR, "death_sfx.mp3"))
+    pygame.mixer.Sound.set_volume(assets[DEATH_SFX], 5000.0)
 
     assets[E1] = pygame.image.load(os.path.join(IMG_DIR, "paragoomba.png")).convert_alpha()
     assets[E1] = pygame.transform.scale(assets["enemy1"], (ENEMY_1_WIDTH, ENEMY_1_HEIGHT))
