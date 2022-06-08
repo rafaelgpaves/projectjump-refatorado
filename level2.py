@@ -77,7 +77,8 @@ def level2(window):
 
     keys_down = {}
 
-    pygame.mixer.music.load((os.path.join(SND_DIR, "level2_music.mp3")))
+    pygame.mixer.music.load(os.path.join(SND_DIR, "level2_music.mp3"))
+    pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
     running = True
     while running:
@@ -188,7 +189,7 @@ def level2(window):
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
             assets[DEATH_SFX].play()
-            
+
             player.kill()
 
             # Movendo tudo para cima de novo
