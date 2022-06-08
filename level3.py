@@ -19,6 +19,7 @@ def level3(window):
     all_enemies = pygame.sprite.Group()
     all_pukes = pygame.sprite.Group()
     all_spikes = pygame.sprite.Group()
+    all_flags = pygame.sprite.Group()
 
     groups = {}
     groups["all_sprites"] = all_sprites
@@ -26,11 +27,9 @@ def level3(window):
     groups["all_enemies"] = all_enemies
     groups["all_pukes"] = all_pukes
     groups["all_spikes"] = all_spikes
+    groups["all_flags"] = all_flags
 
-    background = pygame.image.load("assets/images/background.png")
-    bg = Background(background)
     background_polygon_color = (204, 0, 0)
-    # all_sprites.add(bg)
 
     cube_scroll = 0
 
@@ -71,9 +70,15 @@ def level3(window):
         all_spikes.add(spike)
         all_sprites.add(spike)
 
+    # Flag
+    flag = Flag(groups, assets, 100, -5100)
+    all_flags.add(flag)
+    all_sprites.add(flag)
+
     keys_down = {}
 
-    pygame.mixer.music.load((os.path.join(SND_DIR, "level3_music.mp3")))
+    pygame.mixer.music.load(os.path.join(SND_DIR, "level3_music.mp3"))
+    pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
     running = True
     while running:
@@ -166,11 +171,11 @@ def level3(window):
                 continue
             else:
                 player.rect.centery += abs(player.GRAVITY)
-                # bg.rect.centery += abs(player.GRAVITY)
                 for platform in all_platforms:
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
+                flag.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -178,10 +183,13 @@ def level3(window):
                 platform.rect.centery -= abs(player.GRAVITY)
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
+            flag.rect.centery -= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
+            assets[DEATH_SFX].play()
+            
             player.kill()
 
             # Movendo tudo para cima de novo
@@ -190,6 +198,7 @@ def level3(window):
                 platform.rect.centery -= abs(y_moved)
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved)
+            flag.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
