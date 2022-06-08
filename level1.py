@@ -71,9 +71,14 @@ def level1(window):
         all_enemies.add(enemy)
         all_sprites.add(enemy)
 
+    # Abrindo o arquivo com as coordenadas dos espinhos do nível 1
+    with open("spikes1.txt", "r") as arquivo:
+        spikes = arquivo.readlines()
+
     # Espinhos
-    for i in range(SPIKE_NUMBER):
-        spike = Spike(groups, assets, 530, -800, 0)
+    for i in range(len(spikes)):
+        coords = spikes[i].split(",")
+        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
         all_spikes.add(spike)
         all_sprites.add(spike)
 
