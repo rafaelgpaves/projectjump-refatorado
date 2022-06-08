@@ -54,7 +54,7 @@ def level1(window):
         all_sprites.add(platform)
     
     # Abrindo o arquivo com as coordenadas dos inimigos do nível 1
-    with open('posenem.txt', 'r') as arquivo:
+    with open('posenem1.txt', 'r') as arquivo:
         inimigo1 = arquivo.readlines()
     
     # Gerando os outros inimigos

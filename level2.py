@@ -62,6 +62,16 @@ def level2(window):
         spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
         all_spikes.add(spike)
         all_sprites.add(spike)
+    
+    with open('posenem2.txt', 'r') as arquivo:
+        inimigo1 = arquivo.readlines()
+    
+    # Gerando os outros inimigos
+    for i in range(len(inimigo1)):
+        enem = inimigo1[i].split(',')
+        enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
+        all_enemies.add(enemy)
+        all_sprites.add(enemy)
 
     # Flag
     flag = Flag(groups, assets, 150, -5000)
