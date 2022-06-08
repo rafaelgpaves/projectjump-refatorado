@@ -74,8 +74,9 @@ def level2(window):
         all_sprites.add(spike)
 
     # Flag
-    flag = Flag(groups, assets, HEIGHT/2, -4675)
+    flag = Flag(groups, assets, 150, -5000)
     all_flags.add(flag)
+    all_sprites.add(flag)
 
     keys_down = {}
 
@@ -177,6 +178,7 @@ def level2(window):
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
                     s.rect.centery += abs(player.GRAVITY)
+                flag.rect.centery += abs(player.GRAVITY)
 
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
@@ -184,6 +186,7 @@ def level2(window):
                 platform.rect.centery -= abs(player.GRAVITY)
             for s in all_spikes:
                 s.rect.centery -= abs(player.GRAVITY)
+            flag.rect.centery-= abs(player.GRAVITY)
 
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
@@ -196,6 +199,7 @@ def level2(window):
                 platform.rect.centery -= abs(y_moved)
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved)
+            flag.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 

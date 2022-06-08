@@ -41,8 +41,8 @@ def load_assets():
     assets[SPIKE] = pygame.image.load(os.path.join(IMG_DIR, "ok_spike.png")).convert_alpha()
     assets[SPIKE] = pygame.transform.scale(assets["spike"], (100, 50))
 
-    assets[FLAG] = pygame.image.load(os.path.join(IMG_DIR, "flag.png")).convert()
-    assets[FLAG] = pygame.transform.scale(assets["flag"], (52, 65))
+    assets[FLAG] = pygame.image.load(os.path.join(IMG_DIR, "flag.png")).convert_alpha()
+    assets[FLAG] = pygame.transform.scale(assets["flag"], (60, 70))
 
     assets[THSTARS] = pygame.image.load(os.path.join(IMG_DIR, "3stars.png")).convert()
     assets[TWSTARS] = pygame.image.load(os.path.join(IMG_DIR, "2stars.png")).convert_alpha()
