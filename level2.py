@@ -170,7 +170,6 @@ def level2(window):
                 continue
             else:
                 player.rect.centery += abs(player.GRAVITY)
-                # bg.rect.centery += abs(player.GRAVITY)
                 for platform in all_platforms:
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
@@ -188,6 +187,8 @@ def level2(window):
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
+            assets[DEATH_SFX].play()
+            
             player.kill()
 
             # Movendo tudo para cima de novo
