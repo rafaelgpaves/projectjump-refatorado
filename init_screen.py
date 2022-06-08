@@ -1,5 +1,6 @@
 import pygame
 import random
+import os
 import time
 from config import *
 from funcs import *
@@ -14,7 +15,9 @@ def init_screen(window):
 
     clock = pygame.time.Clock()
     assets = load_assets()
-    
+
+    pygame.mixer.music.load((os.path.join(SND_DIR, "initscreen_music.mp3")))
+    pygame.mixer.music.play(loops=-1)
     running = True
     start_time = pygame.time.get_ticks()
     while running:
