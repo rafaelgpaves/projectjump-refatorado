@@ -86,7 +86,9 @@ def level1(window):
     all_flags.add(flag)
 
     keys_down = {}
-
+    
+    pygame.mixer.music.load((os.path.join(SND_DIR, "level1_music.mp3")))
+    pygame.mixer.music.play(loops=-1)
     running = True
     while running:
         window.fill((0, 0, 0))
