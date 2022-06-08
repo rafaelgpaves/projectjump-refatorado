@@ -33,13 +33,6 @@ def level3(window):
 
     cube_scroll = 0
 
-    # Criando os inimigos
-
-    for i in range(ENEMIES_NUMBER):
-        ene_1 = Enemy_1(groups, assets, 0, HEIGHT)
-        all_enemies.add(ene_1)
-        all_sprites.add(ene_1)
-
     # Plataforma inicial (a mais de baixo)
     init_plat = Init_Platform(groups, assets, 0, HEIGHT)
     all_platforms.add(init_plat)
