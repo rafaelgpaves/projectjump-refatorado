@@ -73,7 +73,7 @@ def level3(window):
 
     keys_down = {}
 
-    pygame.mixer.music.load((os.path.join(SND_DIR, "level1_music.mp3")))
+    pygame.mixer.music.load((os.path.join(SND_DIR, "level3_music.mp3")))
     pygame.mixer.music.play(loops=-1)
     running = True
     while running:

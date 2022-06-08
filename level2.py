@@ -19,6 +19,7 @@ def level2(window):
     all_enemies = pygame.sprite.Group()
     all_pukes = pygame.sprite.Group()
     all_spikes = pygame.sprite.Group()
+    all_flags = pygame.sprite.Group()
 
     groups = {}
     groups["all_sprites"] = all_sprites
@@ -26,6 +27,7 @@ def level2(window):
     groups["all_enemies"] = all_enemies
     groups["all_pukes"] = all_pukes
     groups["all_spikes"] = all_spikes
+    groups["all_flags"] = all_flags
 
     background = pygame.image.load("assets/images/background.png")
     bg = Background(background)
@@ -71,9 +73,13 @@ def level2(window):
         all_spikes.add(spike)
         all_sprites.add(spike)
 
+    # Flag
+    flag = Flag(groups, assets, HEIGHT/2, -4675)
+    all_flags.add(flag)
+
     keys_down = {}
 
-    pygame.mixer.music.load((os.path.join(SND_DIR, "level1_music.mp3")))
+    pygame.mixer.music.load((os.path.join(SND_DIR, "level2_music.mp3")))
     pygame.mixer.music.play(loops=-1)
     running = True
     while running:
