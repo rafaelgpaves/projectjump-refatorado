@@ -78,7 +78,7 @@ def level1(window):
         all_sprites.add(spike)
 
     # Flag
-    flag = Flag(groups, assets, HEIGHT/2, -4675)
+    flag = Flag(groups, assets, 525, -4675)
     all_flags.add(flag)
 
     keys_down = {}
@@ -175,6 +175,7 @@ def level1(window):
                 enemy.rect.centery -= abs(y_moved1)
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved1)
+            flag.rect.centery -= abs(y_moved1)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
@@ -218,6 +219,7 @@ def level1(window):
                 platform.rect.centery -= abs(y_moved)
             for s in all_spikes:
                 s.rect.centery -= abs(y_moved)
+            flag.rect.centery -= abs(y_moved)
             player = Player(groups, assets, init_plat.rect.top)
             all_sprites.add(player)
 
