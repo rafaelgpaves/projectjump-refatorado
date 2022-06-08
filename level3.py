@@ -42,7 +42,7 @@ def level3(window, dificuldade):
     player = Player(groups, assets, init_plat.rect.top)
     all_sprites.add(player)
 
-    # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
+    # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 3
     with open("plataformas3.txt", "r") as arquivo:
         plataformas = arquivo.readlines()
 
@@ -53,8 +53,9 @@ def level3(window, dificuldade):
         all_platforms.add(platform)
         all_sprites.add(platform)
 
-    if dificuldade[1] == True:
+    if dificuldade[1] == True: # Se os espinhos estiverem ativados
 
+        # Abrindo o arquivo com as coordenadas dos espinhos do nível 3
         with open("spikes3.txt", "r") as arquivo:
             spikes = arquivo.readlines()
 
@@ -65,8 +66,9 @@ def level3(window, dificuldade):
             all_spikes.add(spike)
             all_sprites.add(spike)
 
-    if dificuldade[0] == True:
+    if dificuldade[0] == True: # Se os inimigos estiverem ativados
 
+        # Abrindo o arquivo com as coordenadas dos inimigos do nível 3
         with open('posenem3.txt', 'r') as arquivo:
             inimigo1 = arquivo.readlines()
         
@@ -84,9 +86,11 @@ def level3(window, dificuldade):
 
     keys_down = {}
 
+    # Colocando a música
     pygame.mixer.music.load(os.path.join(SND_DIR, "level3_music.mp3"))
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
+    
     running = True
     while running:
         window.fill((102, 0, 0))
@@ -152,6 +156,7 @@ def level3(window, dificuldade):
         # Parte dos inimigos
         all_enemies.update()
 
+        # Colisão com inimigos
         enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(enemy_hit) > 0:
             assets[DEATH_SFX].play()
@@ -185,6 +190,7 @@ def level3(window, dificuldade):
                 for e in all_enemies:
                     e.rect.centery += abs(player.GRAVITY)
 
+        # Fazendo tudo se mover para cima quando o jogador se aproxima do chão
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
             for platform in all_platforms:

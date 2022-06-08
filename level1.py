@@ -53,7 +53,7 @@ def level1(window, dificuldade):
         all_platforms.add(platform)
         all_sprites.add(platform)
 
-    if dificuldade[0] == True:
+    if dificuldade[0] == True: # Se os inimigos estiverem ativados
     
         # Abrindo o arquivo com as coordenadas dos inimigos do nível 1
         with open('posenem1.txt', 'r') as arquivo:
@@ -66,7 +66,7 @@ def level1(window, dificuldade):
             all_enemies.add(enemy)
             all_sprites.add(enemy)
 
-    if dificuldade[1] == True:
+    if dificuldade[1] == True: # Se os espinhos estiverem ativados
 
         # Abrindo o arquivo com as coordenadas dos espinhos do nível 1
         with open("spikes1.txt", "r") as arquivo:
@@ -85,9 +85,11 @@ def level1(window, dificuldade):
 
     keys_down = {}
 
-    pygame.mixer.music.load((os.path.join(SND_DIR, "level1_music.mp3")))
+    # Colocando a música
+    pygame.mixer.music.load(os.path.join(SND_DIR, "level1_music.mp3"))
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
+
     running = True
     while running:
         window.fill((0, 0, 0))
@@ -154,6 +156,7 @@ def level1(window, dificuldade):
         # Parte dos inimigos
         all_enemies.update()
             
+        # Colisão com inimigo
         enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(enemy_hit) > 0:
 
@@ -161,6 +164,7 @@ def level1(window, dificuldade):
             
             player.kill()
             
+            # Movendo tudo para cima e criando outro jogador
             y_moved1 = INIT_PLAT_START_TOP - init_plat.rect.top - 300
             for platform in all_platforms:
                 platform.rect.centery -= abs(y_moved1)
@@ -188,6 +192,7 @@ def level1(window, dificuldade):
                 for enemy in all_enemies:
                     enemy.rect.centery += abs(player.GRAVITY)
 
+        # Fazendo tudo se mover para cima quando o jogador se aproxima do chão
         if player.rect.bottom >= HEIGHT - player.offset:
             player.rect.centery -= abs(player.GRAVITY)
             for platform in all_platforms:

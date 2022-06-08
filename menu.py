@@ -30,24 +30,29 @@ def menu(screen):
             # Evento para começar o jogo
             if event.type == pygame.MOUSEBUTTONDOWN:
 
+                # Entrar no nível 1
                 if inside_level_1 == True:
                     state = LEVEL1
                     running = False
 
+                # Entrar no nível 2
                 if inside_level_2 == True:
                     state = LEVEL2
                     running = False
 
+                # Entrar no nível 3
                 if inside_level_3 == True:
                     state = LEVEL3
                     running = False
 
+                # Ativar/desativar inimigos
                 if inside_enemy == True:
                     if dificuldade[0] == True:
                         dificuldade[0] = False
                     elif dificuldade[0] == False:
                         dificuldade[0] = True
 
+                # Ativar/desativar espinhos
                 if inside_spike == True:
                     if dificuldade[1] == True:
                         dificuldade[1] = False
@@ -97,7 +102,7 @@ def menu(screen):
         inside_enemy = False # Variável que é True se o mouse estiver dentro da caixa e False caso contrário
         if dificuldade[0] == True: # Se os inimigos estiverem ativados, aparecerá um certinho
             screen.blit(assets[CHECK], (50, 550))
-        elif dificuldade[0] == False: # Se os inimigos estiverem desativados, aparecerá uma caixa vazia
+        elif dificuldade[0] == False: # Se os inimigos estiverem desativados, aparecerá um X
             screen.blit(assets[E_CHECK], (50, 550))
         enemy_text = assets[MENU_FONT].render("Inimigos", True, WHITE)
         screen.blit(enemy_text, (125, 560))
@@ -108,7 +113,7 @@ def menu(screen):
         inside_spike = False # Variável que é True se o mouse estiver dentro da caixa e False caso contrário
         if dificuldade[1] == True: # Se os espinhos estiverem ativados, aparecerá um certinho
             screen.blit(assets[CHECK], (50, 630))
-        elif dificuldade[1] == False: # Se os espinhos estiverem desativados, aparecerá uma caixa vazia
+        elif dificuldade[1] == False: # Se os espinhos estiverem desativados, aparecerá um X
             screen.blit(assets[E_CHECK], (50, 630))
         spikes_text = assets[MENU_FONT].render("Espinhos", True, WHITE)
         screen.blit(spikes_text, (125, 640))
