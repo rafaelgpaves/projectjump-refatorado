@@ -64,6 +64,17 @@ def game_over(window, level, tempo):
         minutos = msm[0]
         segundos = msm[1]
 
+        three_stars = assets[THSTARS]
+        two_stars = assets[TWSTARS]
+        one_star = assets[OSTAR]
+        if level == "level1":
+            if int(segundos) < 45 and minutos == 0:
+                window.blit(three_stars, (WIDTH / 2 - three_stars.get_width() / 2, HEIGHT / 2 - three_stars.get_height() / 2))
+            elif int(segundos) < 59 and minutos == 0:
+                window.blit(two_stars, (WIDTH / 2 - two_stars.get_width() / 2, HEIGHT / 2 - two_stars.get_height() / 2))
+            elif minutos >= 1:
+                window.blit(one_star, (WIDTH / 2 - one_star.get_width() / 2, HEIGHT / 2 - one_star.get_height() / 2))
+
 
         pygame.display.update()
     return state
