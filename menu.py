@@ -9,6 +9,8 @@ def menu(screen):
 
     assets = load_assets()
 
+    pygame.mixer.music.load((path.join(SND_DIR, "menu_music.mp3")))
+    pygame.mixer.music.play(loops=-1)
     running = True
     while running:
 
