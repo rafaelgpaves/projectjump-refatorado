@@ -72,17 +72,17 @@ def game_over(window, level, tempo):
         one_star = pygame.transform.scale(one_star, (300, 300))
 
         if level == "level1":
-            if int(segundos) < 45 and int(minutos) == 0:
+            if int(segundos) <= 45 and int(minutos) == 0:
                 window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
-            elif int(segundos) < 59 and int(minutos) == 0:
+            elif int(segundos) <= 59 and int(minutos) == 0:
                 window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
             elif int(minutos) >= 1:
                 window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
 
         if level == "level2":
-            if int(segundos) < 40 and int(minutos) == 0:
+            if int(segundos) <= 40 and int(minutos) == 0:
                 window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
-            elif int(segundos) < 55 and int(minutos) == 0:
+            elif int(segundos) <= 55 and int(minutos) == 0:
                 window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
             elif int(minutos) >= 55 or int(minutos) >= 1:
                 window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
@@ -90,7 +90,7 @@ def game_over(window, level, tempo):
         if level == "level3":
             if int(minutos) <= 1 or (int(minutos) == 1 and int(segundos) == 0):
                 window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
-            elif int(minutos) == 1 and int(segundos) < 40:
+            elif int(minutos) == 1 and int(segundos) <= 30:
                 window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
             else:
                 window.blit(one_star, (WIDTH / 2 - 150 , HEIGHT / 2 - 150))
