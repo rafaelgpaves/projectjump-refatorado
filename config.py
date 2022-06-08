@@ -49,11 +49,6 @@ DARKEST_BLUE = (0, 25, 51)
 YELLOW = (255, 255, 0)
 LIGHT_YELLOW = (150, 150, 0)
 
-# Quantidade de inimigos e outros
-PLATFORM_NUMBER = 15
-ENEMIES_NUMBER = PLATFORM_NUMBER
-SPIKE_NUMBER = 1
-
 # Estados do jogo
 INIT = 0
 MENU = 1
