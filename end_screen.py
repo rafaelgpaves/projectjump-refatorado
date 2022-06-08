@@ -44,11 +44,18 @@ def game_over(window, level, tempo):
                 pygame.draw.polygon(window, background_polygon_color, points, 2)
 
 
-        text = assets[MENU_FONT].render("Seu tempo foi: " + str(tempo), True, (255, 255, 255))
-        text_rect = text.get_rect()
-        text_rect.center = (WIDTH / 2, HEIGHT / 2)
-        text_rect.top = text_rect.top - 100
-        window.blit(text, text_rect)
+        tempofoi = assets[MENU_FONT].render("Seu tempo foi:", True, (255, 255, 255))
+        tempofoi_rect = tempofoi.get_rect()
+        tempofoi_rect.center = (WIDTH / 2, HEIGHT / 2)
+        tempofoi_rect.top = tempofoi_rect.top - 300
+        window.blit(tempofoi, tempofoi_rect)
+
+        tempotxt = assets[MENU_FONT].render(str(tempo), True, (255, 255, 255))
+        tempotxt_rect = tempotxt.get_rect()
+        tempotxt_rect.center = (WIDTH / 2, HEIGHT / 2)
+        tempotxt_rect.top = tempotxt_rect.top - 250
+        window.blit(tempotxt, tempotxt_rect)
+
 
         msm = tempo.split(":")
         if len(msm) <= 2:
@@ -56,6 +63,17 @@ def game_over(window, level, tempo):
                 msm.insert(0, "00")
         minutos = msm[0]
         segundos = msm[1]
+
+        three_stars = pygame.image.load("assets/images/3stars.png")
+        two_stars = pygame.image.load("assets/images/2stars.png")
+        one_star = pygame.image.load("assets/images/1star.png")
+        if level == "level1":
+            if int(segundos) < 45 and int(minutos) == 0:
+                window.blit(three_stars, (WIDTH / 2, HEIGHT / 2))
+            elif int(segundos) < 59 and int(minutos) == 0:
+                window.blit(two_stars, (WIDTH / 2, HEIGHT / 2))
+            elif minutos >= 1:
+                window.blit(one_star, (WIDTH / 2, HEIGHT / 2))
 
 
         pygame.display.update()
