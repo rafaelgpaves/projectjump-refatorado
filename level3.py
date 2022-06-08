@@ -29,10 +29,7 @@ def level3(window):
     groups["all_spikes"] = all_spikes
     groups["all_flags"] = all_flags
 
-    background = pygame.image.load("assets/images/background.png")
-    bg = Background(background)
     background_polygon_color = (204, 0, 0)
-    # all_sprites.add(bg)
 
     cube_scroll = 0
 

@@ -118,16 +118,6 @@ class Player(pygame.sprite.Sprite):
             else:
                 flag.rect.centery -= self.GRAVITY
 
-class Background(pygame.sprite.Sprite):
-    def __init__(self, bgfile):
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = bgfile
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-
-        self.rect.bottom = HEIGHT
-
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, assets, centerx, centery):
         pygame.sprite.Sprite.__init__(self)
@@ -236,8 +226,6 @@ class ENEMY_1_PUKE(pygame.sprite.Sprite):
                 self.kill()
             elif self.rect.centerx > WIDTH:
                 self.kill()
-
-
 
 class Spike(pygame.sprite.Sprite):
     def __init__(self, groups, assets, x_pos, bottom, rotacao):

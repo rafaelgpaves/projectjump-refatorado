@@ -29,10 +29,7 @@ def level1(window):
     groups["all_spikes"] = all_spikes
     groups["all_flags"] = all_flags
 
-    background = pygame.image.load("assets/images/background.png")
-    bg = Background(background)
     background_polygon_color = (48, 48, 48)
-    # all_sprites.add(bg)
 
     cube_scroll = 0
 
@@ -51,7 +48,6 @@ def level1(window):
     # Jogador
     player = Player(groups, assets, init_plat.rect.top)
     all_sprites.add(player)
-    # player_bot = PlayerBottom(player.rect.bottom)
 
     # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 1
     with open("plataformas1.txt", "r") as arquivo:
@@ -86,7 +82,7 @@ def level1(window):
     all_flags.add(flag)
 
     keys_down = {}
-    
+
     pygame.mixer.music.load((os.path.join(SND_DIR, "level1_music.mp3")))
     pygame.mixer.music.play(loops=-1)
     running = True
@@ -189,7 +185,6 @@ def level1(window):
                 continue
             else:
                 player.rect.centery += abs(player.GRAVITY)
-                # bg.rect.centery += abs(player.GRAVITY)
                 for platform in all_platforms:
                     platform.rect.centery += abs(player.GRAVITY)
                 for s in all_spikes:
@@ -211,9 +206,6 @@ def level1(window):
         # Checando colisão do jogador com espinhos
         spike_collision = pygame.sprite.spritecollide(player, groups["all_spikes"], False, pygame.sprite.collide_mask)
         if len(spike_collision) > 0:
-            # player.rect.bottom = HEIGHT - 100
-            # player.rect.centerx = WIDTH/2
-            # return LEVEL1
 
             player.kill()
 
