@@ -72,7 +72,7 @@ def game_over(window, level, tempo):
         one_star = pygame.transform.scale(one_star, (300, 300))
 
         if level == "level1":
-            if int(segundos) <= 45 and int(minutos) == 0:
+            if int(segundos) <= 50 and int(minutos) == 0:
                 window.blit(three_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
             elif int(segundos) <= 59 and int(minutos) == 0:
                 window.blit(two_stars, (WIDTH / 2 - 150, HEIGHT / 2 - 150))
