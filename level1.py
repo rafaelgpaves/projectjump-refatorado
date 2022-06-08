@@ -7,7 +7,7 @@ from funcs import *
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 square_effects = []
 
-def level1(window):
+def level1(window, dificuldade):
     clock = pygame.time.Clock()
 
     total_time = pygame.time.get_ticks() # Variável que guarda o tempo total desde que o jogo foi iniciado
@@ -52,28 +52,32 @@ def level1(window):
         platform = Platform(groups, assets, int(plat[0]), int(plat[1]))
         all_platforms.add(platform)
         all_sprites.add(platform)
-    
-    # Abrindo o arquivo com as coordenadas dos inimigos do nível 1
-    with open('posenem1.txt', 'r') as arquivo:
-        inimigo1 = arquivo.readlines()
-    
-    # Gerando os outros inimigos
-    for i in range(len(inimigo1)):
-        enem = inimigo1[i].split(',')
-        enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
-        all_enemies.add(enemy)
-        all_sprites.add(enemy)
 
-    # Abrindo o arquivo com as coordenadas dos espinhos do nível 1
-    with open("spikes1.txt", "r") as arquivo:
-        spikes = arquivo.readlines()
+    if dificuldade[0] == True:
+    
+        # Abrindo o arquivo com as coordenadas dos inimigos do nível 1
+        with open('posenem1.txt', 'r') as arquivo:
+            inimigo1 = arquivo.readlines()
+        
+        # Gerando os outros inimigos
+        for i in range(len(inimigo1)):
+            enem = inimigo1[i].split(',')
+            enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
+            all_enemies.add(enemy)
+            all_sprites.add(enemy)
 
-    # Espinhos
-    for i in range(len(spikes)):
-        coords = spikes[i].split(",")
-        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
-        all_spikes.add(spike)
-        all_sprites.add(spike)
+    if dificuldade[1] == True:
+
+        # Abrindo o arquivo com as coordenadas dos espinhos do nível 1
+        with open("spikes1.txt", "r") as arquivo:
+            spikes = arquivo.readlines()
+
+        # Espinhos
+        for i in range(len(spikes)):
+            coords = spikes[i].split(",")
+            spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
+            all_spikes.add(spike)
+            all_sprites.add(spike)
 
     # Flag
     flag = Flag(groups, assets, 525, -4675)

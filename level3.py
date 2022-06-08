@@ -7,7 +7,7 @@ from funcs import *
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 square_effects = []
 
-def level3(window):
+def level3(window, dificuldade):
     clock = pygame.time.Clock()
 
     total_time = pygame.time.get_ticks() # Variável que guarda o tempo total desde que o jogo foi iniciado
@@ -53,25 +53,29 @@ def level3(window):
         all_platforms.add(platform)
         all_sprites.add(platform)
 
-    with open("spikes3.txt", "r") as arquivo:
-        spikes = arquivo.readlines()
+    if dificuldade[1] == True:
 
-    # Espinhos
-    for i in range(len(spikes)):
-        coords = spikes[i].split(",")
-        spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
-        all_spikes.add(spike)
-        all_sprites.add(spike)
+        with open("spikes3.txt", "r") as arquivo:
+            spikes = arquivo.readlines()
 
-    with open('posenem3.txt', 'r') as arquivo:
-        inimigo1 = arquivo.readlines()
-    
-    # Gerando os outros inimigos
-    for i in range(len(inimigo1)):
-        enem = inimigo1[i].split(',')
-        enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
-        all_enemies.add(enemy)
-        all_sprites.add(enemy)
+        # Espinhos
+        for i in range(len(spikes)):
+            coords = spikes[i].split(",")
+            spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
+            all_spikes.add(spike)
+            all_sprites.add(spike)
+
+    if dificuldade[0] == True:
+
+        with open('posenem3.txt', 'r') as arquivo:
+            inimigo1 = arquivo.readlines()
+        
+        # Gerando os outros inimigos
+        for i in range(len(inimigo1)):
+            enem = inimigo1[i].split(',')
+            enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
+            all_enemies.add(enemy)
+            all_sprites.add(enemy)
 
     # Flag
     flag = Flag(groups, assets, 100, -5100)

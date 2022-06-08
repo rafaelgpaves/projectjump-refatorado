@@ -1,13 +1,15 @@
 import pygame
 from os import path
 from config import *
-from assets import MENU_FONT, load_assets
+from assets import CHECK, E_CHECK, MENU_FONT, load_assets
 
 def menu(screen):
 
     clock = pygame.time.Clock()
 
     assets = load_assets()
+
+    dificuldade = [True, True] # lista em que o primeiro elemento indica se os inimigos vão aparecer o segundo indica se os inimigos vão aparecer
 
     pygame.mixer.music.load((path.join(SND_DIR, "menu_music.mp3")))
     pygame.mixer.music.play(loops=-1)
@@ -39,6 +41,18 @@ def menu(screen):
                 if inside_level_3 == True:
                     state = LEVEL3
                     running = False
+
+                if inside_enemy == True:
+                    if dificuldade[0] == True:
+                        dificuldade[0] = False
+                    elif dificuldade[0] == False:
+                        dificuldade[0] = True
+
+                if inside_spike == True:
+                    if dificuldade[1] == True:
+                        dificuldade[1] = False
+                    elif dificuldade[1] == False:
+                        dificuldade[1] = True
 
         # Pegando a posição do mouse (e colocando numa tupla)
         mouse = pygame.mouse.get_pos()
@@ -79,7 +93,29 @@ def menu(screen):
             LEVEL3_TEXT = assets[MENU_FONT].render("LEVEL 3", True, GRAY)
             screen.blit(LEVEL3_TEXT, (LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS + 15))
 
+        # Botão de ativar/desativar inimigos
+        inside_enemy = False # Variável que é True se o mouse estiver dentro da caixa e False caso contrário
+        if dificuldade[0] == True: # Se os inimigos estiverem ativados, aparecerá um certinho
+            screen.blit(assets[CHECK], (50, 550))
+        elif dificuldade[0] == False: # Se os inimigos estiverem desativados, aparecerá uma caixa vazia
+            screen.blit(assets[E_CHECK], (50, 550))
+        enemy_text = assets[MENU_FONT].render("Inimigos", True, WHITE)
+        screen.blit(enemy_text, (125, 560))
+        if mouse[0] in range(50, 50 + 60) and mouse[1] in range(550, 550 + 70):
+            inside_enemy = True
+
+        # Botão de ativar/desativar espinhos
+        inside_spike = False # Variável que é True se o mouse estiver dentro da caixa e False caso contrário
+        if dificuldade[1] == True: # Se os espinhos estiverem ativados, aparecerá um certinho
+            screen.blit(assets[CHECK], (50, 630))
+        elif dificuldade[1] == False: # Se os espinhos estiverem desativados, aparecerá uma caixa vazia
+            screen.blit(assets[E_CHECK], (50, 630))
+        spikes_text = assets[MENU_FONT].render("Espinhos", True, WHITE)
+        screen.blit(spikes_text, (125, 640))
+        if mouse[0] in range(50, 50 + 60) and mouse[1] in range(630, 630 + 70):
+            inside_spike = True
+
         # Invertendo o display
         pygame.display.flip()
 
-    return state
+    return state, dificuldade

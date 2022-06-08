@@ -15,6 +15,8 @@ FLAG = "flag"
 THSTARS = "3stars"
 TWSTARS = "2stars"
 OSTAR = "1star"
+CHECK = "checkbox"
+E_CHECK = "empty_checkbox"
 # Sons
 JUMP_SFX = "jump_sfx"
 DEATH_SFX = "death_sfx"
@@ -49,5 +51,10 @@ def load_assets():
     assets[THSTARS] = pygame.image.load(os.path.join(IMG_DIR, "3stars.png")).convert()
     assets[TWSTARS] = pygame.image.load(os.path.join(IMG_DIR, "2stars.png")).convert_alpha()
     assets[OSTAR] = pygame.image.load(os.path.join(IMG_DIR, "1star.png")).convert_alpha()
+
+    assets[CHECK] = pygame.image.load(os.path.join(IMG_DIR, "checkbox.png")).convert()
+    assets[CHECK] = pygame.transform.scale(assets["checkbox"], (60, 70))
+    assets[E_CHECK] = pygame.image.load(os.path.join(IMG_DIR, "empty_checkbox.png")).convert()
+    assets[E_CHECK] = pygame.transform.scale(assets["empty_checkbox"], (60, 70))
 
     return assets
