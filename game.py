@@ -29,20 +29,23 @@ while state != QUIT:
         lvl1 = level1(window, dificuldade)
         state = lvl1[0]
         tempo = lvl1[1]
+        dificuldade = lvl1[2]
         if state == END_SCREEN:
-            state = game_over(window, "level1", tempo)
+            state = game_over(window, "level1", tempo, dificuldade)
     elif state == LEVEL2:
         lvl2 = level2(window, dificuldade)
         state = lvl2[0]
         tempo = lvl2[1]
+        dificuldade = lvl2[2]
         if state == END_SCREEN:
-            state = game_over(window, "level2", tempo)
+            state = game_over(window, "level2", tempo, dificuldade)
     elif state == LEVEL3:
         lvl3 = level3(window, dificuldade)
         state = lvl3[0]
         tempo = lvl3[1]
+        dificuldade = lvl3[2]
         if state == END_SCREEN:
-            state = game_over(window, "level3", tempo)
+            state = game_over(window, "level3", tempo, dificuldade)
 
 # ===== Finalização =====
 pygame.quit() # Função do pygame que finaliza os recursos inicializados

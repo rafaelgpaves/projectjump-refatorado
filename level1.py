@@ -248,4 +248,4 @@ def level1(window, dificuldade):
 
         pygame.display.update()
 
-    return state, tempo
+    return state, tempo, dificuldade

@@ -90,7 +90,7 @@ def level3(window, dificuldade):
     pygame.mixer.music.load(os.path.join(SND_DIR, "level3_music.mp3"))
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=-1)
-    
+
     running = True
     while running:
         window.fill((102, 0, 0))
@@ -245,4 +245,4 @@ def level3(window, dificuldade):
 
         pygame.display.update()
 
-    return state, tempo
+    return state, tempo, dificuldade

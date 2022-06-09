@@ -4,7 +4,7 @@ from config import *
 from funcs import *
 from assets import *
 
-def game_over(window, level, tempo):
+def game_over(window, level, tempo, dificuldade):
     background_color = (0, 0, 0)
     square_effects = []
     cube_scroll = 0
@@ -101,6 +101,25 @@ def game_over(window, level, tempo):
         botao_rect.center = (WIDTH / 2, HEIGHT / 2)
         botao_rect.top = botao_rect.top + 300
         window.blit(botao, botao_rect)
+
+        if dificuldade[0] == False and dificuldade[1] == True: # Texto que aparece quando não tinha inimigos
+            texto_dificuldade = assets[MENU_FONT].render("Pô, mas sem inimigos é fácil né", True, WHITE)
+            texto_dificuldade = pygame.transform.scale(texto_dificuldade, (425, 50))
+            texto_dificuldade_rect = texto_dificuldade.get_rect()
+            texto_dificuldade_rect.center = (WIDTH/2, 600)
+            window.blit(texto_dificuldade, texto_dificuldade_rect)
+        elif dificuldade[0] == True and dificuldade[1] == False: # Texto que aparece quando não tinha espinhos
+            texto_dificuldade = assets[MENU_FONT].render("Pô, mas sem espinhos é fácil né", True, WHITE)
+            texto_dificuldade = pygame.transform.scale(texto_dificuldade, (425, 50))
+            texto_dificuldade_rect = texto_dificuldade.get_rect()
+            texto_dificuldade_rect.center = (WIDTH/2, 600)
+            window.blit(texto_dificuldade, texto_dificuldade_rect)
+        elif dificuldade[0] == False and dificuldade[1] == False: # Texto que aparece quando não tinha espinhos nem inimigos
+            texto_dificuldade = assets[MENU_FONT].render("Pô, mas sem inimigos nem espinhos é fácil né", True, WHITE)
+            texto_dificuldade = pygame.transform.scale(texto_dificuldade, (425, 50))
+            texto_dificuldade_rect = texto_dificuldade.get_rect()
+            texto_dificuldade_rect.center = (WIDTH/2, 600)
+            window.blit(texto_dificuldade, texto_dificuldade_rect)
 
         pygame.display.update()
     return state
