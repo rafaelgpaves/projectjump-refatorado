@@ -3,7 +3,7 @@ Jogo desenvolvido em Pygame para o Projeto Final de Design de Software
 
 Desenvolvido por Bruno Zalcberg, Pedro Garcia Carneiro da Cunha e Rafael Gordon Paves
 
-![PROJECT: Jump](https://github.com/brunozalc/projectjump/blob/main/assets/images/jump.gif =250x560)
+![PROJECT: Jump](https://github.com/brunozalc/projectjump/blob/main/assets/images/jump.gif)
 
 ### Para jogar o jogo, rode o arquivo *game.py*
 
