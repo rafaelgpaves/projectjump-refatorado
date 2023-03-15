@@ -1,6 +1,31 @@
 import pygame, math, random
 import numpy as np
 from config import *
+from assets import *
+
+
+def setup():
+    clock = pygame.time.Clock()
+
+    total_time = pygame.time.get_ticks() # Variável que guarda o tempo total desde que o jogo foi iniciado
+
+    assets = load_assets()
+
+    all_sprites = pygame.sprite.Group()
+    all_platforms = pygame.sprite.Group()
+    all_enemies = pygame.sprite.Group()
+    all_pukes = pygame.sprite.Group()
+    all_spikes = pygame.sprite.Group()
+    all_flags = pygame.sprite.Group()
+
+    groups = {}
+    groups["all_sprites"] = all_sprites
+    groups["all_platforms"] = all_platforms
+    groups["all_enemies"] = all_enemies
+    groups["all_pukes"] = all_pukes
+    groups["all_spikes"] = all_spikes
+    groups["all_flags"] = all_flags
+    return clock,total_time,assets,all_sprites,all_platforms,all_enemies,all_spikes,all_flags,groups
 
 def gira(lines, angle, amount):
     new_lines = lines.copy()
