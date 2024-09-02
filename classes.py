@@ -1,9 +1,12 @@
+"Importando pacotes necessarios para definir classes"
 import pygame
-from config import *
-from assets import *
-from funcs import *
+from config import WIDTH, HEIGHT
+from assets import PLAYER_IMG, PLATFORM, INIT_PLAT, SPIKE, FLAG
 
 class Rect(pygame.sprite.Sprite):
+    """
+    Classe de retangulo generica
+    """
     def __init__(self, image, groups, assets):
         pygame.sprite.Sprite.__init__(self)
         self.image = image
@@ -14,6 +17,9 @@ class Rect(pygame.sprite.Sprite):
         self.assets = assets
 
 class Player(Rect):
+    """
+    Jogador (Deve existir apenas um)
+    """
     def __init__(self, groups, assets, plat_inicial_top):
         super().__init__(assets[PLAYER_IMG], groups, assets)
 
@@ -29,13 +35,16 @@ class Player(Rect):
         self.jumps = 0 # Variável que conta o numero de pulos que o jogador deu
         self.max_jumps = 2 # Número máximo de pulos que o jogador pode dar
 
-        self.is_on_wall = False # Variável que é True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
-        self.is_grounded = True # Variável que é True se o jogador estiver no chão e False caso contrário
-        self.on_platform = False # Variável que é True se o jogador estiver em cima de uma plataforma e False caso contrário
-        self.is_on_platform_right = False # Variável que é True se o jogador estiver encostando no lado direito da plataforma e False caso contrário
-        self.is_on_platform_left = False # Variável que é True se o jogador estiver encostando no lado direito da plataforma e False caso contrário
+        self.is_on_wall = False # True se o jogador estiver em contato com a parede, mas não com o chão e False caso contrário
+        self.is_grounded = True # True se o jogador estiver no chão e False caso contrário
+        self.on_platform = False # True se o jogador estiver em cima de uma plataforma e False caso contrário
+        self.is_on_platform_right = False # True se o jogador estiver encostando no lado direito da plataforma e False caso contrário
+        self.is_on_platform_left = False # True se o jogador estiver encostando no lado direito da plataforma e False caso contrário
 
     def update(self):
+        """
+        Controla a posicao do jogador
+        """
 
         if self.is_on_wall == False and self.is_on_platform_left == False and self.is_on_platform_right == False and self.on_platform == False and self.GRAVITY < self.max_GRAVITY:
             self.GRAVITY += 1
@@ -73,7 +82,7 @@ class Player(Rect):
             self.is_on_wall = False
             self.is_grounded = True
 
-        # Resetando certas variáveis (serve para impedir que uma vez que elas fiquem True, não sejam True para sempre)
+        # Resetando certas variáveis (impedir que qnd fiquem True, não sejam True para sempre)
         self.on_platform = False
         self.is_on_platform_left = False
         self.is_on_platform_right = False
@@ -123,6 +132,9 @@ class Player(Rect):
                 flag.rect.centery -= self.GRAVITY
 
 class Platform(Rect):
+    """
+    Plataforma
+    """
     def __init__(self, groups, assets, centerx, centery):
         super().__init__(assets[PLATFORM], groups, assets)
 
@@ -130,6 +142,9 @@ class Platform(Rect):
         self.rect.centery = centery
 
 class Init_Platform(Rect):
+    """
+    Plataforma inicial (deve existir apenas uma)
+    """
     def __init__(self, groups, assets, left, bottom):
         super().__init__(assets[INIT_PLAT], groups, assets)
 
@@ -137,6 +152,9 @@ class Init_Platform(Rect):
         self.rect.bottom = bottom
 
 class Enemy_1(Rect):
+    """
+    Inimigo
+    """
     def __init__(self, groups, assets, x, y, pace=3, turn=70, speed= 30):           # vira em 98, pq 150 da plataforma - player width
         super().__init__(assets["enemy1"], groups, assets)
 
@@ -149,27 +167,34 @@ class Enemy_1(Rect):
         self.pace_t = 0            # tempo do último passo
 
     def update(self):
+        """
+        Muda a posicao do inimigo
+        """
+
         # Implementando o movimento correto agora
         t_n = pygame.time.get_ticks()
-        if (t_n > self.pace_t + self.speed):
+        if t_n > self.pace_t + self.speed:
             self.pace_t = t_n
 
             self.pace_c += 1
             self.rect.x  += self.direction * self.pace_ta
 
-            if(self.pace_c >= self.turn):
+            if self.pace_c >= self.turn:
                 # girando para o outro lado
                 self.direction *= -1
                 self.pace_c = 0
-            
-            if(self.rect.x <= 0):
+
+            if self.rect.x <= 0:
                 self.direction = 1
                 self.pace_c = 0
-            elif(self.rect.x >= WIDTH - self.rect.width):
+            elif self.rect.x >= WIDTH - self.rect.width:
                 self.direction = 1
                 self.pace_c = 0
 
 class Spike(Rect):
+    """
+    Espinho (encostar nele mata o jogador)
+    """
     def __init__(self, groups, assets, x_pos, bottom, rotacao):
         super().__init__(assets[SPIKE], groups, assets)
 
@@ -179,8 +204,11 @@ class Spike(Rect):
         self.image = pygame.transform.rotate(assets[SPIKE], rotacao)
 
 class Flag(Rect):
+    """
+    Bandeira (encostar nela acaba a fase)
+    """
     def __init__(self, groups, assets, x_pos, bottom):
         super().__init__(assets[FLAG], groups, assets)
-        
+
         self.rect.centerx = x_pos
         self.rect.bottom = bottom

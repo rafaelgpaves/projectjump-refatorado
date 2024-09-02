@@ -1,13 +1,18 @@
-import pygame, math, random
-from config import *
-from assets import *
-from classes import *
-from funcs import *
+"Importando dependencias necessarias para o nivel"
+import os
+import pygame
+from config import WIDTH, HEIGHT, INIT_PLAT_START_TOP, SND_DIR, FPS, MENU, END_SCREEN, QUIT
+from assets import JUMP_SFX, DEATH_SFX
+from classes import Init_Platform, Player, Platform, Enemy_1, Spike, Flag
+from funcs import draw_cubes, cronometro, setup
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 square_effects = []
 
 def level1(window, dificuldade):
+    """
+    Renderizando assets e dificuldade do NIVEL 1
+    """
     clock, total_time, assets, all_sprites, all_platforms, all_enemies, all_spikes, all_flags, groups = setup()
 
     background_polygon_color = (48, 48, 48)
@@ -28,7 +33,7 @@ def level1(window, dificuldade):
         plataformas = arquivo.readlines()
 
     # Outras plataformas
-    for i in range(len(plataformas)):
+    for i, _ in enumerate(plataformas):
         plat = plataformas[i].split(",")
         platform = Platform(groups, assets, int(plat[0]), int(plat[1]))
         all_platforms.add(platform)
@@ -41,7 +46,7 @@ def level1(window, dificuldade):
             inimigo1 = arquivo.readlines()
         
         # Gerando os outros inimigos
-        for i in range(len(inimigo1)):
+        for i, _ in enumerate(inimigo1):
             enem = inimigo1[i].split(',')
             enemy = Enemy_1(groups, assets, int(enem[0]), int(enem[1]))
             all_enemies.add(enemy)
@@ -54,7 +59,7 @@ def level1(window, dificuldade):
             spikes = arquivo.readlines()
 
         # Espinhos
-        for i in range(len(spikes)):
+        for i, _ in enumerate(spikes):
             coords = spikes[i].split(",")
             spike = Spike(groups, assets, int(coords[0]), int(coords[1]), int(coords[2]))
             all_spikes.add(spike)
@@ -109,7 +114,7 @@ def level1(window, dificuldade):
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     state = MENU
-        
+
         all_sprites.update()
 
         # Cubos!
@@ -120,15 +125,15 @@ def level1(window, dificuldade):
 
         # Parte dos inimigos
         all_enemies.update()
-            
+
         # Colisão com inimigo
         enemy_hit = pygame.sprite.spritecollide(player, all_enemies, False, pygame.sprite.collide_mask)
         if len(enemy_hit) > 0:
 
             assets[DEATH_SFX].play()
-            
+
             player.kill()
-            
+
             # Movendo tudo para cima e criando outro jogador
             y_moved1 = INIT_PLAT_START_TOP - init_plat.rect.top - 300
             for platform in all_platforms:
@@ -192,11 +197,10 @@ def level1(window, dificuldade):
         if len(pygame.sprite.spritecollide(player, groups["all_flags"], False, pygame.sprite.collide_mask)) > 0:
             running = False
             state = END_SCREEN
-        
+
         # Cronômetro
         tempo = cronometro(window, total_time)
 
         pygame.display.update()
 
     return state, tempo, dificuldade
-

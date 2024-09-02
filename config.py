@@ -1,3 +1,4 @@
+"Importando path para configurar diretorios"
 from os import path
 
 # Pastas onde estão os assets

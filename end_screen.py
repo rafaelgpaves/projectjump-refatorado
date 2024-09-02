@@ -1,10 +1,14 @@
-import pygame
 import random
-from config import *
-from funcs import *
-from assets import *
+import math
+import pygame
+from config import FPS, MENU, QUIT, WIDTH, HEIGHT, WHITE
+from funcs import load_assets, gira
+from assets import MENU_FONT
 
 def game_over(window, level, tempo, dificuldade):
+    """
+    Renderizando tela de GAME OVER
+    """
     background_color = (0, 0, 0)
     square_effects = []
     cube_scroll = 0

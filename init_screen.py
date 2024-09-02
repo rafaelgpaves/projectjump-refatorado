@@ -1,9 +1,9 @@
-import pygame
-import random
 import os
-import time
-from config import *
-from funcs import *
+import random
+import math
+import pygame
+from config import SND_DIR, FPS, MENU, QUIT
+from funcs import gira
 from assets import MENU_FONT, load_assets
 
 def init_screen(window):
@@ -29,7 +29,7 @@ def init_screen(window):
             if event.type == pygame.KEYDOWN:
                 state = MENU
                 running = False
-        
+
         window.fill(background_color)
         if random.randint(1, 60) == 1:
             square_effects.append([[random.randint(0, window.get_width()), - 90 + cube_scroll], random.randint(0, 359), random.randint(10, 30) / 20, random.randint(15, 50), random.randint(10, 40) / 500])
@@ -76,5 +76,5 @@ def init_screen(window):
 
 
         pygame.display.update()
-    
+
     return state

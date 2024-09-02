@@ -1,6 +1,6 @@
-import pygame
 from os import path
-from config import *
+import pygame
+from config import SND_DIR, FPS, LEVEL1, LEVEL2, LEVEL3, QUIT, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT, LEVEL1_BUTTON_XPOS, LEVEL1_BUTTON_YPOS, LEVEL2_BUTTON_XPOS, LEVEL2_BUTTON_YPOS, LEVEL3_BUTTON_XPOS, LEVEL3_BUTTON_YPOS, GRAY, WHITE, DARK_GRAY, DARKEST_BLUE, DARK_BLUE, RED, LIGHT_RED, BLACK
 from assets import CHECK, E_CHECK, MENU_FONT, load_assets
 
 def menu(screen):
@@ -9,7 +9,8 @@ def menu(screen):
 
     assets = load_assets()
 
-    dificuldade = [True, True] # lista em que o primeiro elemento indica se os inimigos vão aparecer o segundo indica se os inimigos vão aparecer
+    dificuldade = [True, True]
+    # lista em que o primeiro elemento indica se os inimigos vão aparecer o segundo indica se os inimigos vão aparecer
 
     pygame.mixer.music.load((path.join(SND_DIR, "menu_music.mp3")))
     pygame.mixer.music.play(loops=-1)

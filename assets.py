@@ -1,6 +1,7 @@
-import pygame
+"Configs necessarias para inicializar assets"
 import os
-from config import *
+import pygame
+from config import FNT_DIR, SND_DIR, IMG_DIR, PLATFORM_WIDTH, PLATFORM_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT, ENEMY_1_WIDTH, ENEMY_1_HEIGHT
 
 # Fontes
 MENU_FONT = "soloist1"
@@ -22,6 +23,9 @@ JUMP_SFX = "jump_sfx"
 DEATH_SFX = "death_sfx"
 
 def load_assets():
+    """
+    Carregando os assets usados no jogo a um dicionario assets
+    """
     assets = {}
 
     assets[MENU_FONT] = pygame.font.Font(os.path.join(FNT_DIR, "soloist1.ttf"), 40)
