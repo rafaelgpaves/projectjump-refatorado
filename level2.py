@@ -17,7 +17,7 @@ def level2(window, dificuldade):
     player = Player(groups, assets, init_plat.rect.top)
     all_sprites.add(player)
     # Abrindo o arquivo que possui as coordenadas de todas as plataformas do nível 2
-    with open("plataformas2.txt", "r", encoding="utf-8") as arquivo:
+    with open(os.path.join(TXT_DIR, "plataformas2.txt"), "r", encoding="utf-8") as arquivo:
         plataformas = arquivo.readlines()
     # Outras plataformas
     for i in range(len(plataformas)):
@@ -27,7 +27,7 @@ def level2(window, dificuldade):
         all_sprites.add(platform)
     if dificuldade[1] is True: # Se os espinhos estiverem ativados
         # Abrindo o arquivo com as coordenadas dos espnihos do nível 2
-        with open("spikes2.txt", "r", encoding="utf-8") as arquivo:
+        with open(os.path.join(TXT_DIR, "spikes2.txt"), "r", encoding="utf-8") as arquivo:
             spikes = arquivo.readlines()
         # Espinhos
         for i in range(len(spikes)):
@@ -37,7 +37,7 @@ def level2(window, dificuldade):
             all_sprites.add(spike)
     if dificuldade[0] is True: # Se os inimigos estiverem ativados
         # Abrindo o arquivo com as coordenadas dos inimigos do nível 2
-        with open('posenem2.txt', 'r', encoding="utf-8") as arquivo:
+        with open(os.path.join(TXT_DIR, "posenem2.txt"), 'r', encoding="utf-8") as arquivo:
             inimigo1 = arquivo.readlines()
         # Gerando os outros inimigos
         for i in range(len(inimigo1)):
