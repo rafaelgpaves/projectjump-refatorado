@@ -1,5 +1,4 @@
 import pygame, math, random
-import numpy as np
 from config import *
 from assets import *
 
@@ -56,9 +55,9 @@ def cronometro(window, total_time):
     font_timer = pygame.font.Font(None, 36) # Fonte para escrever o timer
     passed_time = pygame.time.get_ticks() - total_time # Variável que guarda o tempo que passou desde o começo do nível
     seconds = passed_time // 1000 # Variável que guarda os segundos
+    minutes = passed_time // 60000 # Variável que guarda os minutos
     if seconds >= 60:
         seconds = seconds - 60*(int(minutes))
-    minutes = passed_time // 60000 # Variável que guarda os minutos
     if seconds < 10:
         seconds = "0" + str(seconds)
     if minutes < 10:
